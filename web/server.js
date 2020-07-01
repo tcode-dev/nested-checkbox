@@ -95,10 +95,7 @@ app.set('views', __dirname + '/app/view');
 app.engine('ejs', ejs.renderFile);
 
 app.get("/", (req, res) => {
-    res.render('index.ejs', {
-        message:"Hello,world",
-        ver: 1
-    });
+    res.render('index.ejs', { list });
 });
 
 app.get("/api", (req, res) => {

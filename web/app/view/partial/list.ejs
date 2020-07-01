@@ -1,7 +1,11 @@
-@foreach ($list as $item)
 <% list.forEach(function (value, key) { %>
 <li class="<%= value['layer']['group'] %>">
     <input type="checkbox" name="<%= value['layer']['name'] %>" value="<%= value['value'] %>" id="<%= `${value['layer']['name']}-${value['value']}` %>" class="<%= value['layer']['trigger'] %>">
     <label for="<%= `${value['layer']['name']}-${value['value']}` %>"><%= value['value'] %></label>
+    <% if (value['children'].length > 0) { %>
+    <ul>
+    <%- include('list', { list: value['children'] }); %>
+    </ul>
+    <% } %>
 </li>
 <% }); %>
