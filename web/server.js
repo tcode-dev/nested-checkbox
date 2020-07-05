@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 8080;
 const List = require('./app/mock/List');
 
 app.set('views', __dirname + '/app/view');
-
+app.use(express.static('public'));
 app.engine('ejs', ejs.renderFile);
 
 app.get("/", (req, res) => {

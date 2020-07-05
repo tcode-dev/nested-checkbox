@@ -11,5 +11,13 @@
             <%- include('partial/list', { list }); %>
         </ul>
     </div>
+    <script src="/js/NestedCheckboxController.js"></script>
+    <script>
+        (function() {
+            var nestedCheckboxController = new NestedCheckboxController();
+
+            nestedCheckboxController.init();
+        }());
+    </script>
 </body>
 </html>
