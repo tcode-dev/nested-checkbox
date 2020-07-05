@@ -31,7 +31,7 @@ export default class Checkbox {
     }
 
     /**
-     * チェック状態を返す
+     * checked状態を返す
      * @return {boolean}
      */
     isChecked() {
