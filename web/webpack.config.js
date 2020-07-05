@@ -1,9 +1,32 @@
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
-    entry: './app/js/top/TopController.js',
+    entry: {
+        app: [
+            './app/js/top/TopController.js',
+          './app/scss/top/index.scss',
+        ],
+      },
     output: {
-        path: path.resolve(__dirname, 'public/js/'),
-        filename: 'TopController.js'
-    }
+        path: path.resolve(__dirname, 'public'),
+        filename: 'js/TopController.js',
+    },
+    module: {
+        rules: [
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader',
+                ],
+            },
+        ]
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'css/top/index.css',
+        }),
+    ],
 };

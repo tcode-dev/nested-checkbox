@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/top/index.css">
 </head>
 <body>
     <div id="j-nestedCheckbox">
-        <ul>
+        <ul class="listGroup--root">
             <%- include('partial/list', { list }); %>
         </ul>
     </div>
+    <p><span id="j-searchApiResult">-</span>件</p>
     <script src="/js/TopController.js"></script>
     <script>
         (function() {

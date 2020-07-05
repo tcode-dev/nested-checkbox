@@ -1,0 +1,46 @@
+@charset "utf-8";
+
+.listGroup--root {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+.listGroup--nested {
+    margin: 0 0 0 30px;
+    padding: 0;
+    list-style: none;
+}
+.listGroup__clickable {
+    padding: 0 0 0 15px;
+    margin: 0;
+    height: 44px;
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.listGroup__line::after {
+    position: absolute;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #eee;
+    content: "";
+    z-index: 1;
+}
+.listGroup__checkbox {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    top: 15px;
+    margin: 0;
+    padding: 0;
+}
+.listGroup__label {
+    line-height: 44px;
+    padding-left: 28px;
+    display: block;
+}

@@ -1,9 +1,13 @@
 <% list.forEach(function (value, key) { %>
 <li class="<%= value['layer']['group'] %>">
-    <input type="checkbox" name="<%= value['layer']['name'] %>" value="<%= value['value'] %>" id="<%= `${value['layer']['name']}-${value['value']}` %>" class="<%= value['layer']['trigger'] %>">
-    <label for="<%= `${value['layer']['name']}-${value['value']}` %>"><%= value['value'] %></label>
+    <div class="listGroup__line">
+        <p class="listGroup__clickable">
+            <input type="checkbox" name="<%= value['layer']['name'] %>" value="<%= value['value'] %>" id="<%= `${value['layer']['name']}-${value['value']}` %>" class="listGroup__checkbox <%= value['layer']['trigger'] %>">
+            <label for="<%= `${value['layer']['name']}-${value['value']}` %>" class="listGroup__label"><%= value['value'] %></label>
+        </p>
+    </div>
     <% if (value['children'].length > 0) { %>
-    <ul>
+    <ul class="listGroup--nested">
         <%- include('list', { list: value['children'] }); %>
     </ul>
     <% } %>
