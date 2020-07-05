@@ -27,9 +27,9 @@ const SELECTOR = {
 };
 
 /**
- * NestedCheckboxController
+ * TopController
  */
-class NestedCheckboxController {
+class TopController {
     /**
      * @constructor
      */
@@ -62,4 +62,4 @@ class NestedCheckboxController {
     }
 }
 
-window.NestedCheckboxController = NestedCheckboxController;
+window.TopController = TopController;
