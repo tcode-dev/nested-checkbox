@@ -4,7 +4,7 @@
     <label for="<%= `${value['layer']['name']}-${value['value']}` %>"><%= value['value'] %></label>
     <% if (value['children'].length > 0) { %>
     <ul>
-    <%- include('list', { list: value['children'] }); %>
+        <%- include('list', { list: value['children'] }); %>
     </ul>
     <% } %>
 </li>
