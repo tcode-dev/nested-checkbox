@@ -15,11 +15,19 @@ export default class Checkbox {
     }
 
     /**
-     * checkboxのon/offを設定する
+     * checked状態を更新する
      * @param {boolean} checked
      */
     check(checked) {
         this.checkbox.checked = checked;
+    }
+
+    /**
+     * indeterminate状態を更新する
+     * @param {boolean} checked
+     */
+    indeterminate(indeterminate) {
+        this.checkbox.indeterminate = indeterminate;
     }
 
     /**
@@ -28,6 +36,14 @@ export default class Checkbox {
      */
     isChecked() {
         return this.checkbox.checked;
+    }
+
+    /**
+     * indeterminate状態を返す
+     * @return {boolean}
+     */
+    isIndeterminate() {
+        return this.checkbox.indeterminate;
     }
 
     /**

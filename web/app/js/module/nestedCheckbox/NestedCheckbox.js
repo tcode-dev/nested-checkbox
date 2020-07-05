@@ -46,6 +46,7 @@ export default class NestedCheckbox extends Checkbox {
      */
     notifyChildren(checked) {
         this.children.forEach(child => {
+            child.indeterminate(false)
             child.check(checked)
             child.notifyChildren(checked);
         });
@@ -54,28 +55,40 @@ export default class NestedCheckbox extends Checkbox {
     /**
      * 親を更新する
      * @param {boolean} checked
-     * @param {boolean} unnecessary 更新する必要がない場合true
      */
-    _notifyParentCallback(checked, unnecessary = false) {
-        const needs = this._needsNotifyParent(checked, unnecessary);
-
-        if (needs) {
-            this.check(checked);
-        }
-
-        this.notifyParent(checked, !needs);
+    _notifyParentCallback(checked) {
+        this._updateChecked(checked);
+        this._updateIndeterminate(checked);
+        this.notifyParent(checked);
     }
 
     /**
-     * 親を更新する必要があるか判定する
+     * checked状態を更新する
      * @param {boolean} checked
-     * @param {boolean} unnecessary 更新する必要がない場合true
+     */
+    _updateChecked(checked) {
+        const needsChecked = this._needsChecked(checked);
+
+        if (!needsChecked) return;
+
+        this.check(checked);
+    }
+
+    /**
+     * indeterminate状態を更新する
+     */
+    _updateIndeterminate() {
+        const indeterminate = this._isIndeterminate();
+
+        this.indeterminate(indeterminate);
+    }
+
+    /**
+     * checked状態を更新する必要があるか判定する
+     * @param {boolean} checked
      * @return {boolean} 更新する必要がある場合true
      */
-    _needsNotifyParent(checked, unnecessary) {
-        // 更新する必要がない場合
-        if (unnecessary) return false;
-
+    _needsChecked(checked) {
         // 親のチェックボックスがonのとき、子のチェックボックスがoffになった場合
         if (!checked && this.isChecked()) return true;
 
@@ -86,12 +99,26 @@ export default class NestedCheckbox extends Checkbox {
     }
 
     /**
+     * checked状態からindeterminate状態を取得する
+     * @return {boolean}
+     */
+    _isIndeterminate() {
+        // 子のチェックボックスが一つ以上on、一つ以上offの場合
+        if (this.children.some(child => child.isChecked()) && this.children.some(child => !child.isChecked())) return true;
+
+        // 子のindeterminateが一つ以上trueの場合
+        if (this.children.some(child => child.isIndeterminate())) return true;
+
+        return false;
+    }
+
+    /**
      * 子の通知を受け取る
      */
     _receiveChildNotice() {
         this.children.forEach(child => {
-            child.setCallback((checked, unnecessary) => {
-                this._notifyParentCallback(checked, unnecessary);
+            child.setCallback((checked) => {
+                this._notifyParentCallback(checked);
             });
         })
     }
