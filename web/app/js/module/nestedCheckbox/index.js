@@ -1,16 +1,16 @@
-import NestedCheckboxFacade from './NestedCheckboxFacade';
+import Facade from './Facade';
 import ParameterBuilder from './ParameterBuilder';
 
 /**
- * NestedCheckboxManager
+ * Index
  */
-export default class NestedCheckboxManager {
+export default class Index {
     /**
      * @constructor
      * @param {object} root HTMLElement
      * @param {array} selector
      */
-    constructor(root, selector) {
+    constructor(root = document, selector) {
         this.root = root;
         this.selector = selector;
     }
@@ -20,7 +20,7 @@ export default class NestedCheckboxManager {
      */
     init() {
         const parent = this.root.querySelector(this.selector[0].GROUP);
-        this.rootCheckbox = new NestedCheckboxFacade(parent, this.selector);
+        this.rootCheckbox = new Facade(parent, this.selector);
     }
 
     /**

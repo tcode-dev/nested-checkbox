@@ -1,14 +1,14 @@
 import Checkbox from './Checkbox';
 
 /**
- * NestedCheckbox
+ * Map
  * 親と子のcheckboxを関連付ける
  */
-export default class NestedCheckbox extends Checkbox {
+export default class Map extends Checkbox {
     /**
      * @constructor
      * @param {object} checkbox HTMLElement
-     * @param {array} children NestedCheckboxを継承したclassのインスタンス
+     * @param {array} children このclassを継承したclassのインスタンス
      */
     constructor(checkbox, children) {
         super(checkbox, (checked) => this._onChange(checked));

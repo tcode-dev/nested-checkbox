@@ -1,11 +1,11 @@
 import cloneDeep from 'lodash/cloneDeep';
-import NestedCheckbox from './NestedCheckbox';
+import Map from './Map';
 
 /**
- * NestedCheckboxFacade
+ * Facade
  * ネストされたcheckboxを再帰的に関連付ける
  */
-export default class NestedCheckboxFacade extends NestedCheckbox {
+export default class Facade extends Map {
     /**
      * @constructor
      * @param {object} parent HTMLElement
@@ -17,7 +17,7 @@ export default class NestedCheckboxFacade extends NestedCheckbox {
         const checkbox = parent.querySelector(targetSelector.TRIGGER);
         const groupList = cloneSelector.length ? parent.querySelectorAll(cloneSelector[0].GROUP) : [];
         const children = Array.from(groupList).map((element) => {
-            return new NestedCheckboxFacade(element, cloneSelector);
+            return new Facade(element, cloneSelector);
         });
 
         super(checkbox, children);

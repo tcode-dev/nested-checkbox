@@ -1,4 +1,4 @@
-import NestedCheckboxManager from '../module/nestedCheckbox';
+import NestedCheckbox from '../module/nestedCheckbox';
 import querystring from 'querystring';
 import UrlParameter from '../module/UrlParameter';
 import Restorer from '../module/Restorer';
@@ -37,7 +37,7 @@ class TopController {
         const root = document.querySelector(SELECTOR.ROOT);
         const urlParameter = new UrlParameter();
 
-        this.nestedCheckboxManager = new NestedCheckboxManager(root, SELECTOR.NESTED);
+        this.nestedCheckbox = new NestedCheckbox(root, SELECTOR.NESTED);
         this.restorer = new Restorer(root, urlParameter.getParameter());
     }
 
@@ -45,9 +45,9 @@ class TopController {
      * init
      */
     init() {
-        this.nestedCheckboxManager.init();
+        this.nestedCheckbox.init();
         this.restorer.restore();
-        this.nestedCheckboxManager.setCallback((params) => {
+        this.nestedCheckbox.setCallback((params) => {
             this.callback(params);
         });
     }
