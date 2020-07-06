@@ -17,5 +17,5 @@ export default class UrlParameter {
             // データ構造を合わせるため単一keyを配列にして返す
             return [name, Array.isArray(value) ? value : [value]];
         }));
-    };
+    }
 }
