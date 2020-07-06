@@ -23,7 +23,7 @@ const SELECTOR = {
             GROUP: '.j-nestedCheckbox__group--layer4',
             TRIGGER: '.j-nestedCheckbox__trigger--layer4',
         },
-    ]
+    ],
 };
 
 /**

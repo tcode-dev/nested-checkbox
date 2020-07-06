@@ -27,7 +27,7 @@ export default class NestedCheckboxManager {
      * setCallback
      * @param {function} callback
      */
-    setCallback(callback = () => { }) {
+    setCallback(callback = () => {}) {
         this.rootCheckbox.setCallback(() => {
             callback(this._getParameter());
         });

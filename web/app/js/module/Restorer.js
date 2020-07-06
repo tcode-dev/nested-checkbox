@@ -20,7 +20,7 @@ export default class Restorer {
         const event = new Event('change');
 
         this.parameters.forEach(([name, value]) => {
-            value.forEach(code => {
+            value.forEach((code) => {
                 const checkbox = this.root.querySelector(`[name="${name}"][value="${code}"]`);
 
                 checkbox.checked = true;

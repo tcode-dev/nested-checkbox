@@ -16,7 +16,7 @@ export default class NestedCheckboxFacade extends NestedCheckbox {
         const targetSelector = cloneSelector.shift();
         const checkbox = parent.querySelector(targetSelector.TRIGGER);
         const groupList = cloneSelector.length ? parent.querySelectorAll(cloneSelector[0].GROUP) : [];
-        const children = Array.from(groupList).map(element => {
+        const children = Array.from(groupList).map((element) => {
             return new NestedCheckboxFacade(element, cloneSelector);
         });
 

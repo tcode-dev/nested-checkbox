@@ -25,7 +25,7 @@ export default class ParameterBuilder {
      * @param {object} state
      */
     _groupByName(state) {
-        state.forEach(checkbox => {
+        state.forEach((checkbox) => {
             const { name, value, isChecked, children } = checkbox;
 
             if (isChecked) {

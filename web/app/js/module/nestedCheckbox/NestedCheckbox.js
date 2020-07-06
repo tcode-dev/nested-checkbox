@@ -14,7 +14,7 @@ export default class NestedCheckbox extends Checkbox {
         super(checkbox, (checked) => this._onChange(checked));
 
         this.children = children;
-        this.notifyParent = () => { };
+        this.notifyParent = () => {};
 
         this._receiveChildNotice();
     }
@@ -28,7 +28,7 @@ export default class NestedCheckbox extends Checkbox {
             name: this.getName(),
             value: this.getValue(),
             isChecked: this.isChecked(),
-            children: this.children.map(child => child.getState()),
+            children: this.children.map((child) => child.getState()),
         };
     }
 
@@ -45,9 +45,9 @@ export default class NestedCheckbox extends Checkbox {
      * @param {boolean} checked
      */
     notifyChildren(checked) {
-        this.children.forEach(child => {
-            child.indeterminate(false)
-            child.check(checked)
+        this.children.forEach((child) => {
+            child.indeterminate(false);
+            child.check(checked);
             child.notifyChildren(checked);
         });
     }
@@ -93,7 +93,7 @@ export default class NestedCheckbox extends Checkbox {
         if (!checked && this.isChecked()) return true;
 
         // すべての子のチェックボックスがonになった場合
-        if (checked && this.children.every(child => child.isChecked())) return true;
+        if (checked && this.children.every((child) => child.isChecked())) return true;
 
         return false;
     }
@@ -104,10 +104,12 @@ export default class NestedCheckbox extends Checkbox {
      */
     _isIndeterminate() {
         // 子のチェックボックスが一つ以上on、一つ以上offの場合
-        if (this.children.some(child => child.isChecked()) && this.children.some(child => !child.isChecked())) return true;
+        if (this.children.some((child) => child.isChecked()) && this.children.some((child) => !child.isChecked())) {
+            return true;
+        }
 
         // 子のindeterminateが一つ以上trueの場合
-        if (this.children.some(child => child.isIndeterminate())) return true;
+        if (this.children.some((child) => child.isIndeterminate())) return true;
 
         return false;
     }
@@ -116,11 +118,11 @@ export default class NestedCheckbox extends Checkbox {
      * 子の通知を受け取る
      */
     _receiveChildNotice() {
-        this.children.forEach(child => {
+        this.children.forEach((child) => {
             child.setCallback((checked) => {
                 this._notifyParentCallback(checked);
             });
-        })
+        });
     }
 
     /**
