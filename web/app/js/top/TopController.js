@@ -1,10 +1,13 @@
+import API from '../const/API.json';
+import ApiClient from '../module/ApiClient';
 import NestedCheckbox from '../module/nestedCheckbox';
-import querystring from 'querystring';
-import UrlParameter from '../module/UrlParameter';
 import Restorer from '../module/Restorer';
+import SearchResultsUpdater from './SearchResultsUpdater';
+import UrlParameter from '../module/UrlParameter';
 
 const SELECTOR = {
     ROOT: '#j-nestedCheckbox',
+    SEARCH_RESULT: '#j-searchResult',
     // 上の階層から定義する
     NESTED: [
         {
@@ -39,6 +42,8 @@ class TopController {
 
         this.nestedCheckbox = new NestedCheckbox(root, SELECTOR.NESTED);
         this.restorer = new Restorer(root, urlParameter.getParameter());
+        this.searchApiClient = new ApiClient(API.SEARCH);
+        this.searchResultsUpdater = new SearchResultsUpdater(SELECTOR.SEARCH_RESULT);
     }
 
     /**
@@ -48,17 +53,18 @@ class TopController {
         this.nestedCheckbox.init();
         this.restorer.restore();
         this.nestedCheckbox.setCallback((params) => {
-            this.callback(params);
+            this.request(params);
         });
+        this.request();
     }
 
     /**
-     * callback
-     * @param {object} params
+     * request
      */
-    callback(params) {
-        console.log(params);
-        console.log(querystring.stringify(params));
+    request() {
+        this.searchApiClient.get(this.nestedCheckbox.getParameter()).then((result) => {
+            this.searchResultsUpdater.update(result);
+        });
     }
 }
 

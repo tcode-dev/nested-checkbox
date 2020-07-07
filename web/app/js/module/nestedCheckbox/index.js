@@ -29,7 +29,7 @@ export default class Index {
      */
     setCallback(callback = () => {}) {
         this.rootCheckbox.setCallback(() => {
-            callback(this._getParameter());
+            callback();
         });
     }
 
@@ -37,7 +37,7 @@ export default class Index {
      * チェックされたname属性のパラメータを取得する
      * @return {object}
      */
-    _getParameter() {
+    getParameter() {
         const parameterBuilder = new ParameterBuilder(this._getState());
 
         return parameterBuilder.build();
