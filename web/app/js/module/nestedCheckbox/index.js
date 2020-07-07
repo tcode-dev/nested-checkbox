@@ -1,4 +1,4 @@
-import Facade from './Facade';
+import Nester from './Nester';
 import ParameterBuilder from './ParameterBuilder';
 
 /**
@@ -20,7 +20,7 @@ export default class Index {
      */
     init() {
         const parent = this.root.querySelector(this.selector[0].GROUP);
-        this.rootCheckbox = new Facade(parent, this.selector);
+        this.rootCheckbox = new Nester(parent, this.selector);
     }
 
     /**
@@ -38,9 +38,9 @@ export default class Index {
      * @return {object}
      */
     _getParameter() {
-        const builder = new ParameterBuilder(this._getState());
+        const parameterBuilder = new ParameterBuilder(this._getState());
 
-        return builder.build();
+        return parameterBuilder.build();
     }
 
     /**

@@ -1,10 +1,10 @@
 import Checkbox from './Checkbox';
 
 /**
- * Map
+ * CheckboxGroup
  * 親と子のcheckboxを関連付ける
  */
-export default class Map extends Checkbox {
+export default class CheckboxGroup extends Checkbox {
     /**
      * @constructor
      * @param {object} checkbox HTMLElement
