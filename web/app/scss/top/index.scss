@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-.listGroup--root {
+.listGroup {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -9,7 +9,7 @@
     border: 1px solid #ddd;
     overflow: hidden;
 }
-.listGroup--nested {
+.listGroup__nested {
     margin: 0 0 0 30px;
     padding: 0;
     list-style: none;
