@@ -2,7 +2,7 @@ import API from '../const/API.json';
 import ApiClient from '../module/ApiClient';
 import NestedCheckbox from '../module/nestedCheckbox';
 import Restorer from '../module/Restorer';
-import SearchResultsUpdater from './SearchResultsUpdater';
+import AnimateCounter from '../module/AnimateCounter';
 import UrlParameter from '../module/UrlParameter';
 
 const SELECTOR = {
@@ -43,7 +43,7 @@ class TopController {
         this.nestedCheckbox = new NestedCheckbox(root, SELECTOR.NESTED);
         this.restorer = new Restorer(root, urlParameter.getParameter());
         this.searchApiClient = new ApiClient(API.SEARCH);
-        this.searchResultsUpdater = new SearchResultsUpdater(SELECTOR.SEARCH_RESULT);
+        this.animateCounter = new AnimateCounter(SELECTOR.SEARCH_RESULT);
     }
 
     /**
@@ -63,8 +63,16 @@ class TopController {
      */
     request() {
         this.searchApiClient.get(this.nestedCheckbox.getParameter()).then((result) => {
-            this.searchResultsUpdater.update(result);
+            this.searchApiCallback(result);
         });
+    }
+
+    /**
+     * searchApiCallback
+     * @param {object} result
+     */
+    searchApiCallback(result) {
+        this.animateCounter.start(result.count);
     }
 }
 
