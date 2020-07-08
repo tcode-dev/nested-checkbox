@@ -1,8 +1,8 @@
+import AnimateCounter from '../module/AnimateCounter';
 import API from '../const/API.json';
 import ApiClient from '../module/ApiClient';
 import NestedCheckbox from '../module/nestedCheckbox';
 import Restorer from '../module/Restorer';
-import AnimateCounter from '../module/AnimateCounter';
 import UrlParameter from '../module/UrlParameter';
 
 const SELECTOR = {
