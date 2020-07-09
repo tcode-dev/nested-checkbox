@@ -52,10 +52,10 @@ class TopController {
     init() {
         this.nestedCheckbox.init();
         this.restorer.restore();
+        this.request();
         this.nestedCheckbox.setCallback(() => {
             this.request();
         });
-        this.request();
     }
 
     /**
