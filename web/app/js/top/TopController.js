@@ -38,13 +38,12 @@ class TopController {
      */
     constructor() {
         const root = document.querySelector(SELECTOR.ROOT);
-        const searchResult = root.querySelector(SELECTOR.SEARCH_RESULT);
         const urlParameter = new UrlParameter();
 
         this.nestedCheckbox = new NestedCheckbox(root, SELECTOR.NESTED);
         this.restorer = new Restorer(root, urlParameter.getParameter());
         this.searchApiClient = new ApiClient(API.SEARCH);
-        this.animateCounter = new AnimateCounter(searchResult);
+        this.animateCounter = new AnimateCounter(root.querySelector(SELECTOR.SEARCH_RESULT));
     }
 
     /**
