@@ -6,10 +6,10 @@ import anime from 'animejs/lib/anime.es.js';
 export default class AnimateCounter {
     /**
      * @constructor
-     * @param {string} selector
+     * @param {object} target HTMLElement
      */
-    constructor(selector) {
-        this.target = document.querySelector(selector);
+    constructor(target) {
+        this.target = target;
     }
 
     /**
