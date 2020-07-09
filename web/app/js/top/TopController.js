@@ -1,6 +1,7 @@
 import AnimateCounter from '../module/AnimateCounter';
 import API from '../const/API.json';
 import ApiClient from '../module/ApiClient';
+import Indeterminate from '../module/Indeterminate';
 import NestedCheckbox from '../module/nestedCheckbox';
 import Restorer from '../module/Restorer';
 import UrlParameter from '../module/UrlParameter';
@@ -8,6 +9,7 @@ import UrlParameter from '../module/UrlParameter';
 const SELECTOR = {
     ROOT: '#j-nestedCheckbox',
     SEARCH_RESULT: '#j-searchResult',
+    INDETERMINATE: '#j-indeterminate',
     // 上の階層から定義する
     NESTED: [
         {
@@ -27,6 +29,9 @@ const SELECTOR = {
             TRIGGER: '.j-nestedCheckbox__trigger--layer4',
         },
     ],
+    STATE: {
+        INDETERMINATE: 'is-indeterminateEnabled',
+    },
 };
 
 /**
@@ -40,6 +45,11 @@ class TopController {
         const root = document.querySelector(SELECTOR.ROOT);
         const urlParameter = new UrlParameter();
 
+        this.indeterminate = new Indeterminate(
+            root,
+            root.querySelector(SELECTOR.INDETERMINATE),
+            SELECTOR.STATE.INDETERMINATE
+        );
         this.nestedCheckbox = new NestedCheckbox(root, SELECTOR.NESTED);
         this.restorer = new Restorer(root, urlParameter.getParameter());
         this.searchApiClient = new ApiClient(API.SEARCH);
