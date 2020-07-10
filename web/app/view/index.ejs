@@ -7,16 +7,20 @@
     <link rel="stylesheet" href="/css/top/index.css">
 </head>
 <body>
-    <div id="j-nestedCheckbox">
-        <ul class="listGroup">
-            <%- include('partial/list', { list }); %>
-        </ul>
-        <p><span id="j-searchResult">0</span>件</p>
-        <div class="inputItem">
-            <input type="checkbox" id="j-indeterminate" class="inputItem__checkbox">
-            <label for="j-indeterminate" class="inputItem__label">indeterminate</label>
+    <form id="j-nestedCheckbox" class="form">
+        <div class="form__group">
+            <ul class="list">
+                <%- include('partial/list', { list }); %>
+            </ul>
         </div>
-    </div>
+        <div class="form__group">
+            <p class=""><span id="j-searchResult">0</span>件</p>
+        </div>
+        <div class="form__group">
+            <input type="checkbox" id="j-indeterminate" class="form__checkbox">
+            <label for="j-indeterminate" class="form__label">indeterminate</label>
+        </div>
+    </form>
     <script src="/js/TopController.js"></script>
     <script>
         (function() {
