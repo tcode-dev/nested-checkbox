@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/top/index.css">
 </head>
 <body>
-    <form id="j-nestedCheckbox" class="form">
+    <form action="/" id="j-nestedCheckbox" class="form">
         <div class="form__group">
             <ul class="list">
                 <%- include('partial/list', { list }); %>
@@ -15,6 +15,7 @@
         </div>
         <div class="form__group">
             <p class=""><span id="j-searchResult">0</span>件</p>
+            <input type="submit" value="検索">
         </div>
         <div class="form__group">
             <input type="checkbox" id="j-indeterminate" class="form__checkbox">
