@@ -4,14 +4,14 @@
  * body
  */
 body {
-    margin:0;
+    margin: 0;
     padding: 0;
     font-family: 'Helvetica Neue',
-        Arial,
-        'Hiragino Kaku Gothic ProN',
-        'Hiragino Sans',
-        Meiryo,
-        sans-serif;
+    Arial,
+    'Hiragino Kaku Gothic ProN',
+    'Hiragino Sans',
+    Meiryo,
+    sans-serif;
 }
 
 /**
@@ -26,36 +26,33 @@ body {
  */
 .form__row--reverse {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
+    justify-content: flex-end;
 }
 .form__row--between {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 .form__btn {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
     display: inline-block;
-    font-weight: 400;
+    padding: .375rem .75rem;
+    border: 1px solid transparent;
+    border-color: #007bff;
+    border-radius: .25rem;
+    background-color: #007bff;
+    color: #fff;
+    vertical-align: middle;
     text-align: center;
     white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
+    font-weight: 400;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    user-select: none;
     &:hover {
-        background-color: #0069d9;
         border-color: #0062cc;
+        background-color: #0069d9;
         cursor: pointer;
     }
 }
@@ -67,49 +64,48 @@ body {
     margin-top: 20px;
 }
 .form__checkbox {
-    opacity:0;
-    -webkit-appearance: none;
-    appearance: none;
     position: absolute;
+    opacity: 0;
+    appearance: none;
 }
 .form__label {
-    padding-left: 36px;
-    display: block;
-    cursor: pointer;
-    line-height: 44px;
-    background-repeat: no-repeat;
-    background-size: 24px;
-    background-position: left center;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDk0ZGQiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzIiB5PSIzIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHJ4PSIyIiByeT0iMiI+PC9yZWN0Pjwvc3ZnPg==);
     position: relative;
+    display: block;
+    padding-left: 36px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDk0ZGQiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cmVjdCB4PSIzIiB5PSIzIiB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHJ4PSIyIiByeT0iMiI+PC9yZWN0Pjwvc3ZnPg==');
+    background-position: left center;
+    background-size: 24px;
+    background-repeat: no-repeat;
+    line-height: 44px;
+    cursor: pointer;
     &::after {
-        display: block;
-        background-repeat: no-repeat;
-        background-size: contain;
-        content: '';
-        width: 16px;
-        height: 16px;
         position: absolute;
         top: 50%;
         left: 4px;
+        display: block;
         margin-top: -8px;
+        width: 16px;
+        height: 16px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        content: '';
     }
     .form__checkbox:checked + & {
         &::after {
-            background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDk0ZGQiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4=);
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDk0ZGQiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4=');
         }
     }
     .form__checkbox:focus + &,
     .form__checkbox:active + & {
         &::after {
-            box-shadow: 0 0 3px 3px rgba(0, 148, 228, 0.5);
+            box-shadow: 0 0 3px 3px rgba(0, 148, 228, .5);
         }
     }
 }
 .is-indeterminateEnabled .form__checkbox:indeterminate {
     + .form__label::after {
-        opacity: 0.8;
-        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDk0ZGQiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiI+PC9saW5lPjwvc3ZnPg==);
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDk0ZGQiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiI+PC9saW5lPjwvc3ZnPg==');
+        opacity: .8;
     }
 }
 
@@ -117,13 +113,13 @@ body {
  * list
  */
 .list {
+    position: relative;
+    overflow: hidden;
     margin: 0;
     padding: 0;
-    list-style: none;
-    position: relative;
-    border-radius: 4px;
     border: 1px solid #ddd;
-    overflow: hidden;
+    border-radius: 4px;
+    list-style: none;
 }
 .list__nested {
     margin: 0 0 0 30px;
@@ -131,19 +127,19 @@ body {
     list-style: none;
 }
 .list__clickable {
-    padding: 0 0 0 15px;
-    margin: 0;
-    height: 44px;
     position: relative;
     box-sizing: border-box;
+    margin: 0;
+    padding: 0 0 0 15px;
+    height: 44px;
     cursor: pointer;
 }
 .list__line::after {
     position: absolute;
     left: 0;
-    height: 1px;
+    z-index: 1;
     width: 100%;
+    height: 1px;
     background-color: #eee;
     content: '';
-    z-index: 1;
 }
