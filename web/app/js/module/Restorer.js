@@ -23,6 +23,8 @@ export default class Restorer {
             value.forEach((code) => {
                 const checkbox = this.root.querySelector(`[name="${name}"][value="${code}"]`);
 
+                if (!checkbox) return;
+
                 checkbox.checked = true;
                 checkbox.dispatchEvent(event);
             });
