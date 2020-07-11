@@ -1,13 +1,15 @@
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = {
     entry: {
-        app: ['./app/js/top/TopController.js', './app/scss/top/index.scss'],
+        'js/TopController': './app/js/top/TopController.js',
+        'css/top': './app/scss/top/index.scss',
     },
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: 'js/TopController.js',
+        filename: '[name].js'
     },
     module: {
         rules: [
@@ -36,8 +38,9 @@ module.exports = {
         ],
     },
     plugins: [
+        new FixStyleOnlyEntriesPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'css/top/index.css',
+            filename: '[name].css',
         }),
     ],
 };
