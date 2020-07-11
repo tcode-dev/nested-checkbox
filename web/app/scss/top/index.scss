@@ -1,6 +1,11 @@
 @charset 'utf-8';
 
+/**
+ * body
+ */
 body {
+    margin:0;
+    padding: 0;
     font-family: 'Helvetica Neue',
         Arial,
         'Hiragino Kaku Gothic ProN',
@@ -8,36 +13,58 @@ body {
         Meiryo,
         sans-serif;
 }
-.list {
+
+/**
+ * container
+ */
+.container {
+    padding: 20px;
+}
+
+/**
+ * form
+ */
+.form__row--reverse {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.form__row--between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.form__btn {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    &:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+        cursor: pointer;
+    }
+}
+.form__text {
     margin: 0;
     padding: 0;
-    list-style: none;
-    position: relative;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    overflow: hidden;
 }
-.list__nested {
-    margin: 0 0 0 30px;
-    padding: 0;
-    list-style: none;
-}
-.list__clickable {
-    padding: 0 0 0 15px;
-    margin: 0;
-    height: 44px;
-    position: relative;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-.list__line::after {
-    position: absolute;
-    left: 0;
-    height: 1px;
-    width: 100%;
-    background-color: #eee;
-    content: '';
-    z-index: 1;
+.form__search {
+    margin-top: 20px;
 }
 .form__checkbox {
     opacity:0;
@@ -84,4 +111,39 @@ body {
         opacity: 0.8;
         background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDk0ZGQiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiI+PC9saW5lPjwvc3ZnPg==);
     }
+}
+
+/**
+ * list
+ */
+.list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+.list__nested {
+    margin: 0 0 0 30px;
+    padding: 0;
+    list-style: none;
+}
+.list__clickable {
+    padding: 0 0 0 15px;
+    margin: 0;
+    height: 44px;
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.list__line::after {
+    position: absolute;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #eee;
+    content: '';
+    z-index: 1;
 }

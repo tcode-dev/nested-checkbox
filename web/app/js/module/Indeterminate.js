@@ -4,12 +4,12 @@
 export default class Indeterminate {
     /**
      * @constructor
-     * @param {object} target HTMLElement
+     * @param {object} root HTMLElement
      * @param {object} checkbox HTMLElement
      * @param {string} stateClass
      */
-    constructor(target, checkbox, stateClass) {
-        this.target = target;
+    constructor(root, checkbox, stateClass) {
+        this.root = root;
         this.checkbox = checkbox;
         this.stateClass = stateClass;
 
@@ -20,7 +20,7 @@ export default class Indeterminate {
      * toggleClass
      */
     toggleClass() {
-        this.target.classList.toggle(this.stateClass);
+        this.root.classList.toggle(this.stateClass);
     }
 
     /**

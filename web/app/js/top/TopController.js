@@ -8,7 +8,8 @@ import UrlParameter from '../module/UrlParameter';
 import Submit from '../module/Submit';
 
 const SELECTOR = {
-    ROOT: '#j-nestedCheckbox',
+    ROOT: '#j-form',
+    NESTED_CHECKBOX: '#j-nestedCheckbox',
     SEARCH_RESULT: '#j-searchResult',
     INDETERMINATE: '#j-indeterminate',
     // 上の階層から定義する
@@ -51,7 +52,7 @@ class TopController {
             root.querySelector(SELECTOR.INDETERMINATE),
             SELECTOR.STATE.INDETERMINATE
         );
-        this.nestedCheckbox = new NestedCheckbox(root, SELECTOR.NESTED);
+        this.nestedCheckbox = new NestedCheckbox(root.querySelector(SELECTOR.NESTED_CHECKBOX), SELECTOR.NESTED);
         this.restorer = new Restorer(root, urlParameter.getParameter());
         this.searchApiClient = new ApiClient(API.SEARCH);
         this.animateCounter = new AnimateCounter(root.querySelector(SELECTOR.SEARCH_RESULT));
