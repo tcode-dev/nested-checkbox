@@ -5,7 +5,8 @@
     "csscomb": "csscomb app/scss",
     "eslint": "eslint '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
-    "prettier": "prettier --check '**/*.js'"
+    "prettier": "prettier --check '**/*.js'",
+    "jest": "jest --coverage"
   },
   "name": "app",
   "version": "1.0.0",

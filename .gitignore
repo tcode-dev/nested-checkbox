@@ -2,3 +2,4 @@ node_modules/
 web/yarn-error.log
 web/public
 docker-compose
+coverage
