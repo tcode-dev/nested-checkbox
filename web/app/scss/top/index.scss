@@ -55,6 +55,11 @@ body {
         background-color: #0069d9;
         cursor: pointer;
     }
+    &:focus,
+    &:active {
+        outline: 0;
+        box-shadow: 0 0 3px 3px rgba(0, 123, 255, .5);
+    }
 }
 .form__text {
     margin: 0;
@@ -105,7 +110,7 @@ body {
 .is-indeterminateEnabled .form__checkbox:indeterminate {
     + .form__label::after {
         background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDk0ZGQiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48bGluZSB4MT0iNSIgeTE9IjEyIiB4Mj0iMTkiIHkyPSIxMiI+PC9saW5lPjwvc3ZnPg==');
-        opacity: .8;
+        opacity: .5;
     }
 }
 
