@@ -15,7 +15,7 @@ let indeterminate;
 describe('Indeterminate', () => {
     beforeEach(() => {
         document.body.innerHTML = `
-<form id="j-form" class="form">
+<form id="j-form">
     <input type="checkbox" id="j-indeterminate">
 </div>
 `;
