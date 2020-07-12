@@ -38,7 +38,10 @@
     "webpack-fix-style-only-entries": "^0.5.1"
   },
   "devDependencies": {
+    "babel-jest": "^26.1.0",
     "eslint": "^7.4.0",
+    "jest": "^26.1.0",
     "nodemon": "^2.0.4"
-  }
+  },
+  "verbose": true
 }
