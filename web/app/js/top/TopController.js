@@ -4,8 +4,9 @@ import ApiClient from '../module/ApiClient';
 import Indeterminate from '../module/Indeterminate';
 import NestedCheckbox from '../module/nestedCheckbox';
 import Restorer from '../module/Restorer';
-import UrlParameter from '../module/UrlParameter';
 import Submit from '../module/Submit';
+import UrlCreator from '../module/UrlCreator';
+import UrlParameter from '../module/UrlParameter';
 
 const SELECTOR = {
     ROOT: '#j-form',
@@ -44,19 +45,19 @@ class TopController {
      * @constructor
      */
     constructor() {
-        const root = document.querySelector(SELECTOR.ROOT);
         const urlParameter = new UrlParameter();
 
+        this.root = document.querySelector(SELECTOR.ROOT);
         this.indeterminate = new Indeterminate(
-            root,
-            root.querySelector(SELECTOR.INDETERMINATE),
+            this.root,
+            this.root.querySelector(SELECTOR.INDETERMINATE),
             SELECTOR.STATE.INDETERMINATE
         );
-        this.nestedCheckbox = new NestedCheckbox(root.querySelector(SELECTOR.NESTED_CHECKBOX), SELECTOR.NESTED);
-        this.restorer = new Restorer(root, urlParameter.getParameter());
+        this.nestedCheckbox = new NestedCheckbox(this.root.querySelector(SELECTOR.NESTED_CHECKBOX), SELECTOR.NESTED);
+        this.restorer = new Restorer(this.root, urlParameter.getParameter());
         this.searchApiClient = new ApiClient(API.SEARCH);
-        this.animateCounter = new AnimateCounter(root.querySelector(SELECTOR.SEARCH_RESULT));
-        this.submit = new Submit(root, () => {
+        this.animateCounter = new AnimateCounter(this.root.querySelector(SELECTOR.SEARCH_RESULT));
+        this.submit = new Submit(this.root, () => {
             return this.submitCallback();
         });
     }
@@ -69,6 +70,7 @@ class TopController {
         this.restorer.restore();
         this.request();
         this.submit.init();
+        this.indeterminate.init();
         this.nestedCheckbox.setCallback(() => {
             this.request();
         });
@@ -96,7 +98,10 @@ class TopController {
      * @return object
      */
     submitCallback() {
-        return this.nestedCheckbox.getParameter();
+        const params = this.nestedCheckbox.getParameter();
+        const urlCreator = new UrlCreator(this.root.action, params);
+
+        location.assign(urlCreator.create());
     }
 }
 

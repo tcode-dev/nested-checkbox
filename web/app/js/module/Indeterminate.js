@@ -12,14 +12,19 @@ export default class Indeterminate {
         this.root = root;
         this.checkbox = checkbox;
         this.stateClass = stateClass;
+    }
 
+    /**
+     * init
+     */
+    init() {
         this._addEventListener();
     }
 
     /**
-     * toggleClass
+     * _toggleClass
      */
-    toggleClass() {
+    _toggleClass() {
         this.root.classList.toggle(this.stateClass);
     }
 
@@ -28,7 +33,7 @@ export default class Indeterminate {
      */
     _addEventListener() {
         this.checkbox.addEventListener('change', () => {
-            this.toggleClass();
+            this._toggleClass();
         });
     }
 }
