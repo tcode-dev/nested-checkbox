@@ -3,15 +3,15 @@ module.exports = {
         [
             '@babel/preset-env',
             {
-                'modules': 'false',
-                'useBuiltIns': 'usage',
-                'targets': '> 0.25%, not dead',
-            }
-        ]
+                modules: 'false',
+                useBuiltIns: 'usage',
+                targets: '> 0.25%, not dead',
+            },
+        ],
     ],
     env: {
         test: {
-            presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
+            presets: [['@babel/preset-env', { targets: { node: 'current' } }]],
         },
     },
 };
