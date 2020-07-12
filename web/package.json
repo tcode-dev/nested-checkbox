@@ -1,6 +1,11 @@
 {
   "scripts": {
-    "build": "webpack"
+    "browserslist": "browserslist",
+    "build": "webpack",
+    "csscomb": "csscomb app/scss",
+    "prettier:fix": "prettier --write '**/*.js'",
+    "prettier": "prettier --check '**/*.js'",
+    "server": "yarn start"
   },
   "name": "app",
   "version": "1.0.0",
