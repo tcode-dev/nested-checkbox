@@ -1,3 +1,4 @@
+const Autoprefixer = require('autoprefixer');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
@@ -40,7 +41,7 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             plugins: [
-                                require('autoprefixer')({
+                                Autoprefixer({
                                     grid: true,
                                 }),
                             ],
