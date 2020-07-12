@@ -21,5 +21,6 @@ app.get('/api/search', (req, res) => {
 });
 
 app.listen(PORT, () => {
+    /* eslint no-console: 0 */
     console.log(`Server listening on port ${PORT}...`);
 });

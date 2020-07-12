@@ -24,7 +24,7 @@ export default class ApiClient {
                     resolve(response.data);
                 })
                 .catch(function (error) {
-                    console.log('ERROR!! occurred in Backend.');
+                    reject(error);
                 });
         });
     }
