@@ -3,10 +3,12 @@
         "browser": true,
         "es2020": true
     },
-    "extends": "eslint:recommended",
+    "extends": "plugin:prettier/recommended",
     "parserOptions": {
         "ecmaVersion": 11,
         "sourceType": "module"
     },
-    "rules": {}
+    "rules": {
+        "no-console": "warn"
+    }
 }
