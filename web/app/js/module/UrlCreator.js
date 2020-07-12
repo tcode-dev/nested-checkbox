@@ -2,6 +2,7 @@ import querystring from 'querystring';
 
 /**
  * UrlCreator
+ * urlにgetパラメータを付加する
  */
 export default class UrlCreator {
     /**
@@ -9,9 +10,9 @@ export default class UrlCreator {
      * @param {string} base
      * @param {object} params
      */
-    constructor(base, params) {
-        this.base = base;
-        this.params = params;
+    constructor(url, params) {
+        this.url = url;
+        this.query = querystring.stringify(params);
     }
 
     /**
@@ -19,9 +20,16 @@ export default class UrlCreator {
      * @return {string}
      */
     create() {
-        const url = new URL(this.base);
-        const query = querystring.stringify(this.params);
+        return `${this.url}${this.getDelimiter()}${this.query}`;
+    }
 
-        return url.origin + (url.search ? `${url.search}&${query}` : `?${query}`);
+    /**
+     * getDelimiter
+     * @return {string}
+     */
+    getDelimiter() {
+        const url = new URL(this.url);
+
+        return url.search ? '&' : '?';
     }
 }
