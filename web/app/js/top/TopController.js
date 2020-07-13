@@ -1,3 +1,4 @@
+import querystring from 'querystring';
 import AnimateCounter from '../module/AnimateCounter';
 import API from '../const/API.json';
 import ApiClient from '../module/ApiClient';
@@ -5,7 +6,6 @@ import Indeterminate from '../module/Indeterminate';
 import NestedCheckbox from '../module/nestedCheckbox';
 import Restorer from '../module/Restorer';
 import Submit from '../module/Submit';
-import UrlCreator from '../module/UrlCreator';
 import UrlParameter from '../module/UrlParameter';
 
 const SELECTOR = {
@@ -98,10 +98,10 @@ class TopController {
      * @return object
      */
     submitCallback() {
-        const params = this.nestedCheckbox.getParameter();
-        const urlCreator = new UrlCreator(this.root.action, params);
+        const object = this.nestedCheckbox.getParameter();
+        const string = querystring.stringify(object);
 
-        location.assign(urlCreator.create());
+        location.assign(`${this.root.action}?${string}`);
     }
 }
 
