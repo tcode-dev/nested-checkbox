@@ -1,12 +1,11 @@
-import querystring from 'querystring';
 import AnimateCounter from '../module/AnimateCounter';
-import API from '../const/API.json';
-import ApiClient from '../module/ApiClient';
 import Indeterminate from '../module/Indeterminate';
 import NestedCheckbox from '../module/nestedCheckbox';
+import querystring from 'querystring';
 import Restorer from '../module/Restorer';
-import Submit from '../module/Submit';
+import Search from '../repository/Search';
 import SearchParams from '../module/SearchParams';
+import Submit from '../module/Submit';
 
 const SELECTOR = {
     ROOT: '#j-form',
@@ -55,7 +54,7 @@ class TopController {
         );
         this.nestedCheckbox = new NestedCheckbox(this.root.querySelector(SELECTOR.NESTED_CHECKBOX), SELECTOR.NESTED);
         this.restorer = new Restorer(this.root, searchParams.parse());
-        this.searchApiClient = new ApiClient(API.SEARCH);
+        this.search = new Search();
         this.animateCounter = new AnimateCounter(this.root.querySelector(SELECTOR.SEARCH_RESULT));
         this.submit = new Submit(this.root, () => {
             return this.submitCallback();
@@ -80,7 +79,7 @@ class TopController {
      * request
      */
     request() {
-        this.searchApiClient.get(this.nestedCheckbox.getParameter()).then((result) => {
+        this.search.get(this.nestedCheckbox.getParameter()).then((result) => {
             this.searchApiCallback(result);
         });
     }

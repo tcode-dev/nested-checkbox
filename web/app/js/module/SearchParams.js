@@ -11,6 +11,7 @@ export default class SearchParams {
     constructor(parameter) {
         this.parameter = parameter;
     }
+
     /**
      * urlのクエリパラメータを取得する
      * @return {array}
