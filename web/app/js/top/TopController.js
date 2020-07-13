@@ -54,7 +54,7 @@ class TopController {
             SELECTOR.STATE.INDETERMINATE
         );
         this.nestedCheckbox = new NestedCheckbox(this.root.querySelector(SELECTOR.NESTED_CHECKBOX), SELECTOR.NESTED);
-        this.restorer = new Restorer(this.root, urlParameter.getParameter());
+        this.restorer = new Restorer(this.root, urlParameter.getParameter(location.search.substring(1)));
         this.searchApiClient = new ApiClient(API.SEARCH);
         this.animateCounter = new AnimateCounter(this.root.querySelector(SELECTOR.SEARCH_RESULT));
         this.submit = new Submit(this.root, () => {

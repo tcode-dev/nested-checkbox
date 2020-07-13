@@ -6,11 +6,11 @@ import querystring from 'querystring';
 export default class UrlParameter {
     /**
      * urlのクエリパラメータを取得する
+     * @param {string} queryParameter
      * @return {array}
      */
-    getParameter() {
-        const string = window.location.search.substring(1);
-        const object = querystring.parse(string);
+    getParameter(queryParameter) {
+        const object = querystring.parse(queryParameter);
 
         return Array.from(
             Object.entries(object).map(([key, value]) => {
