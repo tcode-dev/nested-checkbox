@@ -1,19 +1,25 @@
 import querystring from 'querystring';
 
 /**
- * UrlParameter
+ * SearchParams
  */
-export default class UrlParameter {
+export default class SearchParams {
+    /**
+     * @constructor
+     * @param {string} parameter
+     */
+    constructor(parameter) {
+        this.parameter = parameter;
+    }
     /**
      * urlのクエリパラメータを取得する
-     * @param {string} queryParameter
      * @return {array}
      */
-    getParameter(queryParameter) {
-        const object = querystring.parse(queryParameter);
+    parse() {
+        const params = querystring.parse(this.parameter);
 
         return Array.from(
-            Object.entries(object).map(([key, value]) => {
+            Object.entries(params).map(([key, value]) => {
                 // axiosの仕様で配列の場合keyに[]をつけて送るので取り除く
                 const name = key.replace('[]', '');
 
