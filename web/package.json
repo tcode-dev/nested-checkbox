@@ -42,6 +42,7 @@
     "babel-jest": "^26.1.0",
     "eslint": "^7.4.0",
     "jest": "^26.1.0",
+    "nock": "^13.0.2",
     "nodemon": "^2.0.4"
   },
   "verbose": true
