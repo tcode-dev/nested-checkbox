@@ -1,5 +1,12 @@
 import axios from 'axios';
 
+const CancelToken = axios.CancelToken;
+
+// axios.interceptors.request.use(request => {
+//     console.log(request.url)
+//     return request
+//   })
+  
 /**
  * ApiClient
  */
@@ -10,22 +17,44 @@ export default class ApiClient {
      */
     constructor(url) {
         this.url = url;
+        this.cancel = this._noop();
     }
 
     /**
      * get
      * @param {object} params
      */
-    get(params) {
+    async get(params) {
+        this.cancel();
+
         return new Promise((resolve, reject) => {
             axios
-                .get(this.url, { params })
-                .then(function (response) {
+                .get(this.url, {
+                    params,
+                    cancelToken: new CancelToken((c) => {
+                        this.cancel = c;
+                    }),
+                })
+                .then((response) => {
                     resolve(response.data);
                 })
-                .catch(function (error) {
+                .catch((error) => {
+                    if (axios.isCancel(error)) {
+                        return;
+                    }
                     reject(error);
+                })
+                .finally(() => {
+                    this.cancel = this._noop();
                 });
         });
+    }
+
+    /**
+     * _noop
+     * @return {function}
+     */
+    _noop() {
+        return () => {};
     }
 }

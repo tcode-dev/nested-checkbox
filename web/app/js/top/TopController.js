@@ -72,6 +72,7 @@ class TopController {
         this.indeterminate.init();
         this.nestedCheckbox.setCallback(() => {
             this.request();
+            this.request();
         });
     }
 
@@ -79,9 +80,14 @@ class TopController {
      * request
      */
     request() {
-        this.search.get(this.nestedCheckbox.getParameter()).then((result) => {
-            this.searchApiCallback(result);
-        });
+        this.search
+            .get(this.nestedCheckbox.getParameter())
+            .then((result) => {
+                this.searchApiCallback(result);
+            })
+            .catch(() => {
+                this.searchApiCallback(0);
+            });
     }
 
     /**
