@@ -10,7 +10,7 @@ export default class Index {
      * @param {object} root HTMLElement
      * @param {array} selector
      */
-    constructor(root = document, selector) {
+    constructor(root, selector) {
         this.root = root;
         this.selector = selector;
     }
