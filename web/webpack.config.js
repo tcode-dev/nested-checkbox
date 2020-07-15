@@ -2,6 +2,7 @@ const Autoprefixer = require('autoprefixer');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -52,10 +53,14 @@ module.exports = {
             },
         ],
     },
+    devtool: 'cheap-module-eval-source-map',
     plugins: [
         new FixStyleOnlyEntriesPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
+        new webpack.SourceMapDevToolPlugin({
+            filename: '[name].js.map'
+        })
     ],
 };
