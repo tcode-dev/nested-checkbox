@@ -1,165 +1,145 @@
-import assert from 'assert';
-import axios from 'axios';
-import nock from 'nock';
-
-// import http from 'http';
 import ApiClient from '../ApiClient';
+import assert from 'assert';
+import nock from 'nock';
+import querystring from 'querystring';
 
-const baseUrl = 'http://api.client.localhost';
-const path = {
-    success: '/success',
-    fail: '/fail'
-};
-const url = `${baseUrl}${path}`;
-const params = {test:"123"};
-const results = { status: 'success' };
-const response = { data: results };
-const successMock = jest.fn(() => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(response);
-        }, 10);
-    });
-});
-const failMock = jest.fn(() => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            reject();
-        }, 1000);
-    });
-});
-
-// jest.mock('axios');
-// axios.get.mockResolvedValue(response);
+const url = 'http://localhost';
+const path = '/api/search';
+const params = { cd: '01' };
+const results = { count: 123 };
+const query = querystring.stringify(params);
+const urlPath = `${url}${path}`;
+const pathQuery = `${path}?${query}`;
 
 describe('ApiClient', () => {
-    beforeEach(() => {
-        nock(baseUrl)
-          .get(path)
-        //   .persist()
-          .reply(200, {
-            name: 'chick-p'
-          });
-      })
-      afterEach(() => {
-        nock.cleanAll();
-      });
     describe('constructor', () => {
-        test('urlがセットされること', () => {
-            const apiClient = new ApiClient(url);
+        it('urlがセットされること', () => {
+            const apiClient = new ApiClient(urlPath);
 
-            assert.strictEqual(apiClient.url, url);
+            assert.strictEqual(apiClient.url, urlPath);
         });
     });
 
     describe('success', () => {
+        beforeEach(() => {
+            nock(url).get(pathQuery).reply(200, results);
+        });
 
+        it('thenを通ること', (done) => {
+            const apiClient = new ApiClient(urlPath);
 
-        test('thenを通ること', async () => {
-            // axios.get.mockImplementationOnce(() => Promise.resolve(response));
-            const apiClient = new ApiClient(url);
-
-            apiClient.get(params).then((data) => {
-                expect(data).toEqual(results);
+            apiClient.get(params).then(() => {
+                done();
             });
         });
 
-        test('catchを通らないこと', async () => {
-            // axios.get.mockImplementationOnce(() => Promise.resolve(response));
-            const apiClient = new ApiClient(url);
+        it('catchを通らないこと', (done) => {
+            const apiClient = new ApiClient(urlPath);
             const callback = jest.fn();
 
             apiClient
-                .get()
+                .get(params)
                 .then(jest.fn())
                 .catch(callback)
                 .finally(() => {
                     expect(callback).not.toHaveBeenCalled();
+                    done();
                 });
         });
-/*
-        test('finallyを通ること', async () => {
-            // axios.get.mockImplementationOnce(() => Promise.resolve(response));
-            const apiClient = new ApiClient(url);
-            const callback = jest.fn();
+
+        it('finallyを通ること', (done) => {
+            const apiClient = new ApiClient(urlPath);
 
             apiClient
-                .get()
-                .then(callback)
+                .get(params)
+                .then(jest.fn())
                 .finally(() => {
-                    expect(callback).toHaveBeenCalled();
+                    done();
                 });
         });
 
-        test('responseが返ること', async () => {
-            // axios.get.mockImplementationOnce(() => Promise.resolve(response));
-            const apiClient = new ApiClient(url);
+        it('responseが返ること', (done) => {
+            const apiClient = new ApiClient(urlPath);
 
-            apiClient.get().then((data) => {
+            apiClient.get(params).then((data) => {
                 expect(data).toEqual(results);
+                done();
             });
         });
-*/
     });
-/*
+
     describe('fail', () => {
-        test('thenを通らないこと', async () => {
-            // axios.get.mockImplementationOnce(() => Promise.reject());
-            const apiClient = new ApiClient(url);
+        beforeEach(() => {
+            nock(url).get(pathQuery).reply(400);
+        });
+
+        it('thenを通らないこと', (done) => {
+            const apiClient = new ApiClient(urlPath);
             const callback = jest.fn();
 
-            apiClient
-                .get()
+            return apiClient
+                .get(params)
                 .then(callback)
                 .catch(() => {
                     expect(callback).not.toHaveBeenCalled();
+                    done();
                 });
         });
 
-        test('catchを通ること', async () => {
-            // axios.get.mockImplementationOnce(() => Promise.reject());
-            const apiClient = new ApiClient(url);
-            const callback = jest.fn();
+        it('catchを通ること', (done) => {
+            const apiClient = new ApiClient(urlPath);
 
             apiClient
-                .get()
-                .then(callback)
+                .get(params)
+                .then(jest.fn())
                 .catch(() => {
-                    expect(callback).not.toHaveBeenCalled();
+                    done();
                 });
         });
 
-        test('finallyを通ること', async () => {
-            // axios.get.mockImplementationOnce(() => Promise.reject());
-            const apiClient = new ApiClient(url);
-            const successCallback = jest.fn();
-            const failCallback = jest.fn();
+        it('finallyを通ること', (done) => {
+            const apiClient = new ApiClient(urlPath);
 
             apiClient
-                .get()
-                .then(successCallback)
-                .catch(failCallback)
+                .get(params)
+                .then(jest.fn())
+                .catch(jest.fn())
                 .finally(() => {
-                    expect(successCallback).not.toHaveBeenCalled();
-                    expect(failCallback).toHaveBeenCalled();
+                    done();
                 });
         });
     });
 
     describe('cancel', () => {
-        test('cancelされること', async () => {
-            // axios.get.mockImplementationOnce(successMock);
-            const apiClient = new ApiClient(url);
+        beforeEach(() => {
+            nock(url).get(pathQuery).reply(200, results);
+        });
+
+        it('cancelできること', (done) => {
+            const apiClient = new ApiClient(urlPath);
             const successCallback = jest.fn();
             const finallyCallback = jest.fn();
 
-            apiClient.get().then(successCallback).finally(finallyCallback);
+            apiClient.get(params).then(successCallback).finally(finallyCallback);
+            apiClient.cancel();
 
-            apiClient.get({a: "b"}).then(() => {
+            expect(successCallback).not.toHaveBeenCalled();
+            expect(finallyCallback).not.toHaveBeenCalled();
+            done();
+        });
+
+        it('apiが連続で呼ばれた場合、過去の通信がcancelされること', (done) => {
+            const apiClient = new ApiClient(urlPath);
+            const successCallback = jest.fn();
+            const finallyCallback = jest.fn();
+
+            apiClient.get(params).then(successCallback).finally(finallyCallback);
+
+            apiClient.get(params).then(() => {
                 expect(successCallback).not.toHaveBeenCalled();
                 expect(finallyCallback).not.toHaveBeenCalled();
+                done();
             });
         });
     });
-    */
 });

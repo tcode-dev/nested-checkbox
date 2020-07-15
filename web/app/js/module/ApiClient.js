@@ -2,11 +2,6 @@ import axios from 'axios';
 
 const CancelToken = axios.CancelToken;
 
-// axios.interceptors.request.use(request => {
-//     console.log(request.url)
-//     return request
-//   })
-  
 /**
  * ApiClient
  */
@@ -39,9 +34,8 @@ export default class ApiClient {
                     resolve(response.data);
                 })
                 .catch((error) => {
-                    if (axios.isCancel(error)) {
-                        return;
-                    }
+                    if (axios.isCancel(error)) return;
+
                     reject(error);
                 })
                 .finally(() => {

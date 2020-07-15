@@ -1,9 +1,10 @@
 import AnimateCounter from '../module/AnimateCounter';
+import API from '../const/API.json';
+import ApiClient from '../module/ApiClient';
 import Indeterminate from '../module/Indeterminate';
 import NestedCheckbox from '../module/nestedCheckbox';
 import querystring from 'querystring';
 import Restorer from '../module/Restorer';
-import Search from '../repository/Search';
 import SearchParams from '../module/SearchParams';
 import Submit from '../module/Submit';
 
@@ -54,7 +55,7 @@ class TopController {
         );
         this.nestedCheckbox = new NestedCheckbox(this.root.querySelector(SELECTOR.NESTED_CHECKBOX), SELECTOR.NESTED);
         this.restorer = new Restorer(this.root, searchParams.parse());
-        this.search = new Search();
+        this.searchApi = new ApiClient(API.SEARCH);
         this.animateCounter = new AnimateCounter(this.root.querySelector(SELECTOR.SEARCH_RESULT));
         this.submit = new Submit(this.root, () => {
             return this.submitCallback();
@@ -72,7 +73,6 @@ class TopController {
         this.indeterminate.init();
         this.nestedCheckbox.setCallback(() => {
             this.request();
-            this.request();
         });
     }
 
@@ -80,7 +80,7 @@ class TopController {
      * request
      */
     request() {
-        this.search
+        this.searchApi
             .get(this.nestedCheckbox.getParameter())
             .then((result) => {
                 this.searchApiCallback(result);
