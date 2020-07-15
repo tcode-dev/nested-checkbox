@@ -86,7 +86,7 @@ class TopController {
                 this.searchApiCallback(result);
             })
             .catch(() => {
-                this.searchApiCallback(0);
+                this.searchApiCallback({ count: 0 });
             });
     }
 
