@@ -1,5 +1,4 @@
 import ApiClient from '../ApiClient';
-import assert from 'assert';
 import nock from 'nock';
 import querystring from 'querystring';
 
@@ -16,7 +15,7 @@ describe('ApiClient', () => {
         it('urlがセットされること', () => {
             const apiClient = new ApiClient(urlPath);
 
-            assert.strictEqual(apiClient.url, urlPath);
+            expect(apiClient.url).toEqual(urlPath);
         });
     });
 
