@@ -21,7 +21,7 @@ export default class SearchParams {
 
         return Array.from(
             Object.entries(params).map(([key, value]) => {
-                // axiosの仕様で配列の場合keyに[]をつけて送るので取り除く
+                // 配列の場合[]を取り除く
                 const name = key.replace('[]', '');
 
                 // querystringの仕様で単一keyは文字列、複数keyは配列が返される
