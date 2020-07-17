@@ -64,6 +64,10 @@ module.exports = (env) => {
                 },
             ],
         },
+        watch: !!env.watch,
+        watchOptions: {
+            poll: 5000
+        },
         devtool: env.prod ? false : 'source-map',
         plugins: [
             new FixStyleOnlyEntriesPlugin(),

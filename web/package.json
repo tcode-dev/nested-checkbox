@@ -1,8 +1,9 @@
 {
   "scripts": {
     "browserslist": "browserslist",
-    "dev": "webpack --env.dev",
-    "prod": "webpack --env.prod",
+    "build": "webpack --env.dev",
+    "build:watch": "webpack --env.watch",
+    "build:prod": "webpack --env.prod",
     "csscomb": "csscomb app/scss",
     "eslint": "eslint '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
