@@ -5,10 +5,10 @@ import querystring from 'querystring';
 const URL = 'http://localhost';
 const PATH = '/api/search';
 const PARAMS = { cd: '01' };
-const RESULTS = { count: 123 };
 const QUERY = querystring.stringify(PARAMS);
 const URL_PATH = `${URL}${PATH}`;
 const PATH_QUERY = `${PATH}?${QUERY}`;
+const RESULTS = { count: 123 };
 
 describe('ApiClient', () => {
     describe('constructor', () => {
