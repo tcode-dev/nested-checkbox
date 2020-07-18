@@ -66,7 +66,8 @@ module.exports = (env) => {
         },
         watch: !!env.watch,
         watchOptions: {
-            poll: 5000
+            poll: 5000,
+            ignored: /node_modules/
         },
         devtool: env.prod ? false : 'source-map',
         plugins: [
