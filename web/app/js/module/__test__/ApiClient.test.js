@@ -140,5 +140,16 @@ describe('ApiClient', () => {
                 done();
             });
         });
+
+        it('別のインスタンスはcancelされないこと', (done) => {
+            const apiClient1 = new ApiClient(urlPath);
+            const apiClient2 = new ApiClient(urlPath);
+
+            Promise.all([apiClient1.get(params), apiClient2.get(params)]).then(([data1, data2]) => {
+                expect(data1).toEqual(results);
+                expect(data2).toEqual(results);
+                done();
+            });
+        });
     });
 });
