@@ -144,19 +144,13 @@ describe('ApiClient', () => {
         it('別のインスタンスはcancelされないこと', (done) => {
             const apiClient1 = new ApiClient(urlPath);
             const apiClient2 = new ApiClient(urlPath);
-            const successCallback = jest.fn();
-            const finallyCallback = jest.fn();
-            const promise1 = apiClient1.get(params);
+            const promise = apiClient1.get(params);
 
-            apiClient2.get(params).then(successCallback).finally(finallyCallback);
+            apiClient2.get(params);
 
-            const promise2 = apiClient2.get(params);
-
-            Promise.all([promise1, promise2]).then(([data1, data2]) => {
+            Promise.all([promise, apiClient2.get(params)]).then(([data1, data2]) => {
                 expect(data1).toEqual(results);
                 expect(data2).toEqual(results);
-                expect(successCallback).not.toHaveBeenCalled();
-                expect(finallyCallback).not.toHaveBeenCalled();
                 done();
             });
         });
