@@ -9,10 +9,10 @@ const SELECTOR = {
     },
 };
 
-let root;
-let indeterminate;
-
 describe('Indeterminate', () => {
+    let root;
+    let indeterminate;
+
     beforeEach(() => {
         document.body.innerHTML = `
 <form id="j-form">

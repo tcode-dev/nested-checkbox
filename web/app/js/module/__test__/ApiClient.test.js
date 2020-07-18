@@ -2,42 +2,42 @@ import ApiClient from '../ApiClient';
 import nock from 'nock';
 import querystring from 'querystring';
 
-const url = 'http://localhost';
-const path = '/api/search';
-const params = { cd: '01' };
-const results = { count: 123 };
-const query = querystring.stringify(params);
-const urlPath = `${url}${path}`;
-const pathQuery = `${path}?${query}`;
+const URL = 'http://localhost';
+const PATH = '/api/search';
+const PARAMS = { cd: '01' };
+const RESULTS = { count: 123 };
+const QUERY = querystring.stringify(PARAMS);
+const URL_PATH = `${URL}${PATH}`;
+const PATH_QUERY = `${PATH}?${QUERY}`;
 
 describe('ApiClient', () => {
     describe('constructor', () => {
         it('urlがセットされること', () => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
 
-            expect(apiClient.url).toEqual(urlPath);
+            expect(apiClient.url).toEqual(URL_PATH);
         });
     });
 
     describe('success', () => {
         beforeEach(() => {
-            nock(url).get(pathQuery).reply(200, results);
+            nock(URL).get(PATH_QUERY).reply(200, RESULTS);
         });
 
         it('thenを通ること', (done) => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
 
-            apiClient.get(params).then(() => {
+            apiClient.get(PARAMS).then(() => {
                 done();
             });
         });
 
         it('catchを通らないこと', (done) => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
             const callback = jest.fn();
 
             apiClient
-                .get(params)
+                .get(PARAMS)
                 .then(jest.fn())
                 .catch(callback)
                 .finally(() => {
@@ -47,10 +47,10 @@ describe('ApiClient', () => {
         });
 
         it('finallyを通ること', (done) => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
 
             apiClient
-                .get(params)
+                .get(PARAMS)
                 .then(jest.fn())
                 .finally(() => {
                     done();
@@ -58,10 +58,10 @@ describe('ApiClient', () => {
         });
 
         it('responseが返ること', (done) => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
 
-            apiClient.get(params).then((data) => {
-                expect(data).toEqual(results);
+            apiClient.get(PARAMS).then((data) => {
+                expect(data).toEqual(RESULTS);
                 done();
             });
         });
@@ -69,15 +69,15 @@ describe('ApiClient', () => {
 
     describe('fail', () => {
         beforeEach(() => {
-            nock(url).get(pathQuery).reply(400);
+            nock(URL).get(PATH_QUERY).reply(400);
         });
 
         it('thenを通らないこと', (done) => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
             const callback = jest.fn();
 
             return apiClient
-                .get(params)
+                .get(PARAMS)
                 .then(callback)
                 .catch(() => {
                     expect(callback).not.toHaveBeenCalled();
@@ -86,10 +86,10 @@ describe('ApiClient', () => {
         });
 
         it('catchを通ること', (done) => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
 
             apiClient
-                .get(params)
+                .get(PARAMS)
                 .then(jest.fn())
                 .catch(() => {
                     done();
@@ -97,10 +97,10 @@ describe('ApiClient', () => {
         });
 
         it('finallyを通ること', (done) => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
 
             apiClient
-                .get(params)
+                .get(PARAMS)
                 .then(jest.fn())
                 .catch(jest.fn())
                 .finally(() => {
@@ -111,15 +111,15 @@ describe('ApiClient', () => {
 
     describe('cancel', () => {
         beforeEach(() => {
-            nock(url).get(pathQuery).reply(200, results);
+            nock(URL).get(PATH_QUERY).reply(200, RESULTS);
         });
 
         it('cancelできること', (done) => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
             const successCallback = jest.fn();
             const finallyCallback = jest.fn();
 
-            apiClient.get(params).then(successCallback).finally(finallyCallback);
+            apiClient.get(PARAMS).then(successCallback).finally(finallyCallback);
             apiClient.cancel();
 
             expect(successCallback).not.toHaveBeenCalled();
@@ -128,13 +128,13 @@ describe('ApiClient', () => {
         });
 
         it('apiが連続で呼ばれた場合、過去の通信がcancelされること', (done) => {
-            const apiClient = new ApiClient(urlPath);
+            const apiClient = new ApiClient(URL_PATH);
             const successCallback = jest.fn();
             const finallyCallback = jest.fn();
 
-            apiClient.get(params).then(successCallback).finally(finallyCallback);
+            apiClient.get(PARAMS).then(successCallback).finally(finallyCallback);
 
-            apiClient.get(params).then(() => {
+            apiClient.get(PARAMS).then(() => {
                 expect(successCallback).not.toHaveBeenCalled();
                 expect(finallyCallback).not.toHaveBeenCalled();
                 done();
@@ -142,15 +142,15 @@ describe('ApiClient', () => {
         });
 
         it('別のインスタンスはcancelされないこと', (done) => {
-            const apiClient1 = new ApiClient(urlPath);
-            const apiClient2 = new ApiClient(urlPath);
-            const promise = apiClient1.get(params);
+            const apiClient1 = new ApiClient(URL_PATH);
+            const apiClient2 = new ApiClient(URL_PATH);
+            const promise = apiClient1.get(PARAMS);
 
-            apiClient2.get(params);
+            apiClient2.get(PARAMS);
 
-            Promise.all([promise, apiClient2.get(params)]).then(([data1, data2]) => {
-                expect(data1).toEqual(results);
-                expect(data2).toEqual(results);
+            Promise.all([promise, apiClient2.get(PARAMS)]).then(([data1, data2]) => {
+                expect(data1).toEqual(RESULTS);
+                expect(data2).toEqual(RESULTS);
                 done();
             });
         });

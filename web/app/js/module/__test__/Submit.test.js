@@ -5,10 +5,10 @@ const SELECTOR = {
     BUTTON: '#j-button',
 };
 
-let root;
-let button;
-
 describe('Submit', () => {
+    let root;
+    let button;
+
     beforeEach(() => {
         document.body.innerHTML = `
 <form id="j-form">
