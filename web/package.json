@@ -1,9 +1,9 @@
 {
   "scripts": {
     "browserslist": "browserslist",
-    "build": "webpack --env.dev",
-    "build:watch": "webpack --env.watch",
-    "build:prod": "webpack --env.prod",
+    "build": "webpack --config webpack.dev.js --mode development",
+    "build:watch": "webpack --config webpack.dev.js --env.watch --mode development",
+    "build:prod": "webpack --config webpack.prod.js --mode production",
     "csscomb": "csscomb app/scss",
     "eslint": "eslint '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
@@ -45,7 +45,8 @@
     "jest": "^26.1.0",
     "nock": "^13.0.2",
     "nodemon": "^2.0.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "webpack-merge": "^5.0.9"
   },
   "verbose": true
 }
