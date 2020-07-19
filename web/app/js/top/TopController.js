@@ -3,7 +3,7 @@ import API from '../const/API.json';
 import ApiClient from '../module/ApiClient';
 import Indeterminate from '../module/Indeterminate';
 import NestedCheckbox from '../module/nestedCheckbox';
-import querystring from 'querystring';
+import PageTransition from '../module/PageTransition';
 import Restorer from '../module/Restorer';
 import SearchParams from '../module/SearchParams';
 import Submit from '../module/Submit';
@@ -60,6 +60,7 @@ class TopController {
         this.submit = new Submit(this.root, () => {
             return this.submitCallback();
         });
+        this.pageTransition = new PageTransition(`${this.root.action}?`);
     }
 
     /**
@@ -103,10 +104,7 @@ class TopController {
      * @return object
      */
     submitCallback() {
-        const object = this.nestedCheckbox.getParameter();
-        const string = querystring.stringify(object);
-
-        location.assign(`${this.root.action}?${string}`);
+        this.pageTransition.transition(this.nestedCheckbox.getParameter());
     }
 }
 
