@@ -20,7 +20,7 @@ export default class ApiClient {
      * @param {object} params
      * @return {object} Promise
      */
-    async get(params) {
+    get(params) {
         this.cancel();
 
         return new Promise((resolve, reject) => {

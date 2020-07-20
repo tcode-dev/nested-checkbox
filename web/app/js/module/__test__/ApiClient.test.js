@@ -76,7 +76,7 @@ describe('ApiClient', () => {
             const apiClient = new ApiClient(URL_PATH);
             const callback = jest.fn();
 
-            return apiClient
+            apiClient
                 .get(PARAMS)
                 .then(callback)
                 .catch(() => {

@@ -29,7 +29,6 @@ describe('Indeterminate', () => {
             const indeterminateInstance = new Indeterminate(root, indeterminate, SELECTOR.STATE.INDETERMINATE);
 
             indeterminateInstance.init();
-
             indeterminate.click();
 
             assert.ok(root.classList.contains(SELECTOR.STATE.INDETERMINATE));
@@ -39,7 +38,6 @@ describe('Indeterminate', () => {
             const indeterminateInstance = new Indeterminate(root, indeterminate, SELECTOR.STATE.INDETERMINATE);
 
             indeterminateInstance.init();
-
             indeterminate.click();
 
             assert.ok(root.classList.contains(SELECTOR.STATE.INDETERMINATE));
