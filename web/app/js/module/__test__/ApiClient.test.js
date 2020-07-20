@@ -11,14 +11,6 @@ const PATH_QUERY = `${PATH}?${QUERY}`;
 const RESULTS = { count: 123 };
 
 describe('ApiClient', () => {
-    describe('constructor', () => {
-        it('urlがセットされること', () => {
-            const apiClient = new ApiClient(URL_PATH);
-
-            expect(apiClient.url).toEqual(URL_PATH);
-        });
-    });
-
     describe('success', () => {
         beforeEach(() => {
             nock(URL).get(PATH_QUERY).reply(200, RESULTS);
