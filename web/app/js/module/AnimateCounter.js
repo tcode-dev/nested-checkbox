@@ -15,10 +15,13 @@ export default class AnimateCounter {
     /**
      * start
      * @param {number} count
+     * @return {object} Promise
      */
     start(count) {
         this._setup();
         this._animate(count);
+
+        return this.anime.finished;
     }
 
     /**
