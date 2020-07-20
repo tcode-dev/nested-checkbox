@@ -45,9 +45,9 @@ class TopController {
      * @constructor
      */
     constructor() {
-        const searchParams = new SearchParams(location.search.substring(1));
+        const searchParams = new SearchParams(window.location.search.substring(1));
 
-        this.root = document.querySelector(SELECTOR.ROOT);
+        this.root = window.document.querySelector(SELECTOR.ROOT);
         this.indeterminate = new Indeterminate(
             this.root,
             this.root.querySelector(SELECTOR.INDETERMINATE),

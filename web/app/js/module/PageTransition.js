@@ -19,6 +19,6 @@ export default class PageTransition {
     transition(params) {
         const query = querystring.stringify(params);
 
-        location.assign(`${this.url}${query}`);
+        window.location.assign(`${this.url}${query}`);
     }
 }
