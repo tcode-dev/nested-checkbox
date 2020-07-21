@@ -1,0 +1,224 @@
+import NestedCheckbox from '../../nestedCheckbox';
+
+const SELECTOR = {
+    NESTED_CHECKBOX: '#j-nestedCheckbox',
+    NESTED: [
+        {
+            GROUP: '.j-nestedCheckbox__group--layer1',
+            TRIGGER: '.j-nestedCheckbox__trigger--layer1',
+        },
+        {
+            GROUP: '.j-nestedCheckbox__group--layer2',
+            TRIGGER: '.j-nestedCheckbox__trigger--layer2',
+        },
+        {
+            GROUP: '.j-nestedCheckbox__group--layer3',
+            TRIGGER: '.j-nestedCheckbox__trigger--layer3',
+        },
+        {
+            GROUP: '.j-nestedCheckbox__group--layer4',
+            TRIGGER: '.j-nestedCheckbox__trigger--layer4',
+        },
+    ],
+};
+
+describe('nestedCheckbox', () => {
+    let root;
+    let rootCheckbox;
+    let allCheckbox;
+
+    beforeEach(() => {
+        document.body.innerHTML = `
+<ul id="j-nestedCheckbox">
+    <li class="j-nestedCheckbox__group--layer1">
+        <input type="checkbox" name="layer1_cd" value="1" class="j-nestedCheckbox__trigger--layer1">
+        <ul>
+            <li class="j-nestedCheckbox__group--layer2">
+                <input type="checkbox" name="layer2_cd" value="1-1" class="j-nestedCheckbox__trigger--layer2">
+            </li>
+            <li class="j-nestedCheckbox__group--layer2">
+                <input type="checkbox" name="layer2_cd" value="1-2" class="j-nestedCheckbox__trigger--layer2">
+                <ul>
+                    <li class="j-nestedCheckbox__group--layer3">
+                        <input type="checkbox" name="layer3_cd" value="1-2-1" class="j-nestedCheckbox__trigger--layer3">
+                    </li>
+                    <li class="j-nestedCheckbox__group--layer3">
+                        <input type="checkbox" name="layer3_cd" value="1-2-2" class="j-nestedCheckbox__trigger--layer3">
+                    </li>
+                </ul>
+            </li>
+            <li class="j-nestedCheckbox__group--layer2">
+                <input type="checkbox" name="layer2_cd" value="1-3" class="j-nestedCheckbox__trigger--layer2">
+                <ul>
+                    <li class="j-nestedCheckbox__group--layer3">
+                        <input type="checkbox" name="layer3_cd" value="1-3-1" class="j-nestedCheckbox__trigger--layer3">
+                    </li>
+                    <li class="j-nestedCheckbox__group--layer3">
+                        <input type="checkbox" name="layer3_cd" value="1-3-2" class="j-nestedCheckbox__trigger--layer3">
+                        <ul>
+                            <li class="j-nestedCheckbox__group--layer4">
+                                <input type="checkbox" name="layer4_cd" value="1-3-2-1" class="j-nestedCheckbox__trigger--layer4">
+                            </li>
+                            <li class="j-nestedCheckbox__group--layer4">
+                                <input type="checkbox" name="layer4_cd" value="1-3-2-2" class="j-nestedCheckbox__trigger--layer4">
+                            </li>
+                            <li class="j-nestedCheckbox__group--layer4">
+                                <input type="checkbox" name="layer4_cd" value="1-3-2-3" class="j-nestedCheckbox__trigger--layer4">
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="j-nestedCheckbox__group--layer3">
+                        <input type="checkbox" name="layer3_cd" value="1-3-3" class="j-nestedCheckbox__trigger--layer3">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+`;
+
+        root = document.querySelector(SELECTOR.NESTED_CHECKBOX);
+        rootCheckbox = root.querySelector('[name="layer1_cd"]');
+        allCheckbox = root.querySelectorAll(`[type="checkbox"]`);
+    });
+
+    describe('constructor', () => {
+        it('引数のdomを省略した場合、documentが使用されること', () => {
+            const mockCallback = jest.fn();
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED);
+
+            nestedCheckbox.init();
+            nestedCheckbox.setCallback(mockCallback);
+            rootCheckbox.click();
+
+            expect(mockCallback).toHaveBeenCalled();
+        });
+    });
+
+    describe('init', () => {
+        it('最上位のチェックがonになったとき、すべてのチェックがonになること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+
+            root.querySelector('[name="layer1_cd"]').click();
+            root.querySelectorAll(`[type="checkbox"]`).forEach((checkbox) => {
+                expect(checkbox.checked).toEqual(true);
+            });
+        });
+
+        it('最上位のチェックがoffになったとき、すべてのチェックがoffになること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            rootCheckbox.click();
+
+            allCheckbox.forEach((checkbox) => {
+                expect(checkbox.checked).toEqual(true);
+            });
+
+            rootCheckbox.click();
+
+            allCheckbox.forEach((checkbox) => {
+                expect(checkbox.checked).toEqual(false);
+            });
+        });
+
+        it('2層目のチェックがonになったとき、配下のすべてのチェックがonになること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            root.querySelector('[name="layer2_cd"][value="1-2"]').click();
+
+            root.querySelectorAll('[name="layer3_cd"][value="^1-2-"]').forEach((checkbox) => {
+                expect(checkbox.checked).toEqual(true);
+            });
+        });
+
+        it('2層目のチェックがすべてonになったとき、最上位のチェックがonになること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            root.querySelectorAll('[name="layer2_cd"]').forEach((checkbox) => {
+                checkbox.click();
+            });
+
+            expect(rootCheckbox.checked).toEqual(true);
+        });
+
+        it('すべてのチェックがonの状態で2層目のチェックがoffになったとき、最上位のチェックがoffになること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            rootCheckbox.click();
+
+            expect(rootCheckbox.checked).toEqual(true);
+
+            root.querySelector('[name="layer2_cd"][value="1-2"]').click();
+
+            expect(rootCheckbox.checked).toEqual(false);
+        });
+    });
+
+    describe('setCallback', () => {
+        it('最上位のチェックがonになったとき、callbackが呼ばれること', () => {
+            const mockCallback = jest.fn();
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            nestedCheckbox.setCallback(mockCallback);
+            rootCheckbox.click();
+
+            expect(mockCallback).toHaveBeenCalled();
+        });
+
+        it('最下層のチェックがonになったとき、callbackが呼ばれること', () => {
+            const mockCallback = jest.fn();
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            nestedCheckbox.setCallback(mockCallback);
+            root.querySelector('[name="layer4_cd"][value="1-3-2-1"]').click();
+
+            expect(mockCallback).toHaveBeenCalled();
+        });
+
+        it('callbackを省略した場合エラーにならないこと', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            nestedCheckbox.setCallback();
+            rootCheckbox.click();
+        });
+    });
+
+    describe('getParameter', () => {
+        it('最上位のチェックがonのとき、最上位のパラメータのみ取得できること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            rootCheckbox.click();
+
+            expect(nestedCheckbox.getParameter()).toEqual({layer1_cd:['1']});
+        });
+
+        it('2層目のみチェックがonのとき、2層目のパラメータのみ取得できること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            root.querySelector('[name="layer2_cd"][value="1-2"]').click();
+
+            expect(nestedCheckbox.getParameter()).toEqual({layer2_cd:['1-2']});
+        });
+
+        it('2層目のチェックがoff、3層目のパラメータが複数チェックがonのとき、3層目のパラメータが複数取得できること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            root.querySelector('[name="layer3_cd"][value="1-3-1"]').click();
+            root.querySelector('[name="layer3_cd"][value="1-3-2"]').click();
+
+            expect(nestedCheckbox.getParameter()).toEqual({layer3_cd:['1-3-1', '1-3-2']});
+        });
+    });
+});
