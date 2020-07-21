@@ -7,12 +7,12 @@ import ParameterBuilder from './ParameterBuilder';
 export default class Index {
     /**
      * @constructor
-     * @param {object} root HTMLElement
      * @param {array} selector
+     * @param {object} root HTMLElement
      */
-    constructor(root, selector) {
-        this.root = root;
+    constructor(selector, root = window.document) {
         this.selector = selector;
+        this.root = root;
     }
 
     /**
@@ -20,7 +20,7 @@ export default class Index {
      */
     init() {
         const parent = this.root.querySelector(this.selector[0].GROUP);
-        this.rootCheckbox = new Nester(parent, this.selector);
+        this.rootCheckbox = new Nester(this.selector, parent);
     }
 
     /**

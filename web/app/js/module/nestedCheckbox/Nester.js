@@ -8,16 +8,16 @@ import CheckboxGroup from './CheckboxGroup';
 export default class Nester extends CheckboxGroup {
     /**
      * @constructor
-     * @param {object} parent HTMLElement
      * @param {array} selector
+     * @param {object} parent HTMLElement
      */
-    constructor(parent, selector) {
+    constructor(selector, parent) {
         const cloneSelector = cloneDeep(selector);
         const targetSelector = cloneSelector.shift();
         const checkbox = parent.querySelector(targetSelector.TRIGGER);
         const groupList = cloneSelector.length ? parent.querySelectorAll(cloneSelector[0].GROUP) : [];
         const children = Array.from(groupList).map((element) => {
-            return new Nester(element, cloneSelector);
+            return new Nester(cloneSelector, element);
         });
 
         super(checkbox, children);
