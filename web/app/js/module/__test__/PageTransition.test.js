@@ -5,7 +5,7 @@ const PARAMS = { cd: '01' };
 
 describe('PageTransition', () => {
     describe('transition', () => {
-        test('location.assignに文字列化されたurlが渡されること', () => {
+        it('location.assignに文字列化されたurlが渡されること', () => {
             const pageTransition = new PageTransition(URL);
             const mock = jest.fn();
             const originalWindow = { ...window };

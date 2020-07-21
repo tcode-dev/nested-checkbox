@@ -7,7 +7,7 @@ const EXPECTED = [
 
 describe('SearchParams', () => {
     describe('parse', () => {
-        test('queryがobjectに変換されること', () => {
+        it('queryがobjectに変換されること', () => {
             const query = 'layer3_cd=1-2-2&layer4_cd=1-3-2-1&layer4_cd=1-3-2-3';
             const searchParams = new SearchParams(query);
             const result = searchParams.parse();
@@ -15,7 +15,7 @@ describe('SearchParams', () => {
             expect(result).toEqual(EXPECTED);
         });
 
-        test('配列のqueryがobjectに変換されること', () => {
+        it('配列のqueryがobjectに変換されること', () => {
             const query = 'layer3_cd[]=1-2-2&layer4_cd[]=1-3-2-1&layer4_cd[]=1-3-2-3';
             const searchParams = new SearchParams(query);
             const result = searchParams.parse();

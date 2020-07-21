@@ -21,7 +21,7 @@ describe('Submit', () => {
     });
 
     describe('init', () => {
-        test('submitされたとき、callbackが実行されること', () => {
+        it('submitされたとき、callbackが実行されること', () => {
             const mockCallback = jest.fn();
             const submit = new Submit(root, mockCallback);
 

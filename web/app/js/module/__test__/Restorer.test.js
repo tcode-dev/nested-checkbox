@@ -36,7 +36,7 @@ describe('Restorer', () => {
     });
 
     describe('restore', () => {
-        test('指定したパラメータのdomが復元されること', () => {
+        it('指定したパラメータのdomが復元されること', () => {
             const checkbox = root.querySelector(`[name="layer1_cd"][value="1"]`);
             const params = [['layer1_cd', ['1']]];
             const restorer = new Restorer(root, params);
@@ -46,7 +46,7 @@ describe('Restorer', () => {
             expect(checkbox.checked).toEqual(true);
         });
 
-        test('指定したパラメータが複数ある場合、domが複数復元されること', () => {
+        it('指定したパラメータが複数ある場合、domが複数復元されること', () => {
             const checkbox1 = root.querySelector(`[name="layer2_cd"][value="1-1"]`);
             const checkbox2 = root.querySelector(`[name="layer3_cd"][value="1-2-2"]`);
             const params = [
@@ -61,7 +61,7 @@ describe('Restorer', () => {
             expect(checkbox2.checked).toEqual(true);
         });
 
-        test('domが復元されたときにイベントが発火すること', () => {
+        it('domが復元されたときにイベントが発火すること', () => {
             const checkbox = root.querySelector(`[name="layer1_cd"][value="1"]`);
             const params = [['layer1_cd', ['1']]];
             const restorer = new Restorer(root, params);
@@ -73,7 +73,7 @@ describe('Restorer', () => {
             restorer.restore();
         });
 
-        test('指定したパラメータが存在しない場合domが復元されないこと', () => {
+        it('指定したパラメータが存在しない場合domが復元されないこと', () => {
             const params = [['layer1_cd', ['0']]];
             const restorer = new Restorer(root, params);
 
@@ -84,7 +84,7 @@ describe('Restorer', () => {
             expect(checkbox).toEqual(null);
         });
 
-        test('空のパラメータを渡された場合domが復元されないこと', () => {
+        it('空のパラメータを渡された場合domが復元されないこと', () => {
             const restorer = new Restorer(root, []);
 
             restorer.restore();

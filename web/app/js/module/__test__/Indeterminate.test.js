@@ -25,7 +25,7 @@ describe('Indeterminate', () => {
     });
 
     describe('init', () => {
-        test('checkがonになったとき、classが付与されること', () => {
+        it('checkがonになったとき、classが付与されること', () => {
             const indeterminateInstance = new Indeterminate(root, indeterminate, SELECTOR.STATE.INDETERMINATE);
 
             indeterminateInstance.init();
@@ -34,7 +34,7 @@ describe('Indeterminate', () => {
             assert.ok(root.classList.contains(SELECTOR.STATE.INDETERMINATE));
         });
 
-        test('checkがoffになったとき、classが外れること', () => {
+        it('checkがoffになったとき、classが外れること', () => {
             const indeterminateInstance = new Indeterminate(root, indeterminate, SELECTOR.STATE.INDETERMINATE);
 
             indeterminateInstance.init();

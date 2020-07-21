@@ -14,7 +14,7 @@ describe('AnimateCounter', () => {
     });
 
     describe('start', () => {
-        test('アニメーション終了後、domに数値が反映されていること', (done) => {
+        it('アニメーション終了後、domに数値が反映されていること', (done) => {
             const count = 10;
             const animateCounter = new AnimateCounter(searchResult);
 
@@ -25,7 +25,7 @@ describe('AnimateCounter', () => {
             });
         });
 
-        test('アニメーションが連続して実行された場合、過去のアニメーションがキャンセルされること', (done) => {
+        it('アニメーションが連続して実行された場合、過去のアニメーションがキャンセルされること', (done) => {
             const firstCount = 10;
             const secondCount = 20;
             const animateCounter = new AnimateCounter(searchResult);
