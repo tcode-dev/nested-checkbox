@@ -1,5 +1,6 @@
 const Autoprefixer = require('autoprefixer');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
@@ -10,7 +11,6 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: '[name].js',
     },
     module: {
         rules: [
@@ -63,10 +63,5 @@ module.exports = {
             },
         ],
     },
-    plugins: [
-        new FixStyleOnlyEntriesPlugin(),
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-        }),
-    ],
+    plugins: [new FixStyleOnlyEntriesPlugin(), new ManifestPlugin()],
 };
