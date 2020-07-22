@@ -199,7 +199,7 @@ describe('nestedCheckbox', () => {
             nestedCheckbox.init();
             rootCheckbox.click();
 
-            expect(nestedCheckbox.getParameter()).toEqual({layer1_cd:['1']});
+            expect(nestedCheckbox.getParameter()).toEqual({ layer1_cd: ['1'] });
         });
 
         it('2層目のみチェックがonのとき、2層目のパラメータのみ取得できること', () => {
@@ -208,7 +208,7 @@ describe('nestedCheckbox', () => {
             nestedCheckbox.init();
             root.querySelector('[name="layer2_cd"][value="1-2"]').click();
 
-            expect(nestedCheckbox.getParameter()).toEqual({layer2_cd:['1-2']});
+            expect(nestedCheckbox.getParameter()).toEqual({ layer2_cd: ['1-2'] });
         });
 
         it('2層目のチェックがoff、3層目のパラメータが複数チェックがonのとき、3層目のパラメータが複数取得できること', () => {
@@ -218,7 +218,7 @@ describe('nestedCheckbox', () => {
             root.querySelector('[name="layer3_cd"][value="1-3-1"]').click();
             root.querySelector('[name="layer3_cd"][value="1-3-2"]').click();
 
-            expect(nestedCheckbox.getParameter()).toEqual({layer3_cd:['1-3-1', '1-3-2']});
+            expect(nestedCheckbox.getParameter()).toEqual({ layer3_cd: ['1-3-1', '1-3-2'] });
         });
     });
 });
