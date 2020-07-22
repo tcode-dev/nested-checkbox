@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NestedCheckbox</title>
-    <link rel="stylesheet" href="/css/top/index.css">
+    <link rel="stylesheet" href="<%- asset('/css/top/index.css') %>">
 </head>
 <body>
 <div class="container">
@@ -24,7 +24,7 @@
             <button type="submit" class="form__btn">Submit</button>
         </div>
     </form>
-    <script src="/js/TopController.js"></script>
+    <script src="<%- asset('/js/TopController.js') %>"></script>
     <script>
         (function() {
             var topController = new TopController();
