@@ -2,9 +2,9 @@ const express = require('express');
 const ejs = require('ejs');
 const app = express();
 const PORT = process.env.PORT || 8080;
-const List = require('./app/mock/List');
+const List = require('./app/server/mock/List');
 
-app.set('views', __dirname + '/app/view');
+app.set('views', __dirname + '/app/server/view');
 app.use(express.static('public'));
 app.engine('ejs', ejs.renderFile);
 
