@@ -4,7 +4,7 @@
 ネストされたチェックボックスの連動
 
 ## Sample
-<img src="./sample.gif" width="300">
+<img src="./doc/sample.gif" width="300">
 
 ```html
 <ul>

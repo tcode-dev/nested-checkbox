@@ -1,12 +1,12 @@
-const asset = require(__dirname + '/app/server/library/asset');
+const asset = require(__dirname + '/backend/library/asset');
 const express = require('express');
 const ejs = require('ejs');
 const app = express();
 const PORT = process.env.PORT || 8080;
-const List = require('./app/server/mock/List');
+const List = require('./backend/mock/List');
 
-app.set('views', __dirname + '/app/server/view');
-app.use(express.static('public'));
+app.set('views', __dirname + '/backend/view');
+app.use(express.static(__dirname + '/public'));
 app.engine('ejs', ejs.renderFile);
 
 app.get('/', (req, res) => {

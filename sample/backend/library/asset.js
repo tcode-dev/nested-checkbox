@@ -1,4 +1,4 @@
-const manifest = require('../../../public/manifest.json');
+const manifest = require('../../public/manifest.json');
 
 /**
  * asset

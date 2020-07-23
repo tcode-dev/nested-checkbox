@@ -6,11 +6,11 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        '/js/TopController': './app/js/top/TopController.js',
-        '/css/top/index': './app/scss/top/index.scss',
+        '/js/TopController': './sample/frontend/js/top/TopController.js',
+        '/css/top/index': './sample/frontend/scss/top/index.scss',
     },
     output: {
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, 'sample/public'),
     },
     module: {
         rules: [
