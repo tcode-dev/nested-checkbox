@@ -1,5 +1,5 @@
-node_modules/
-web/yarn-error.log
-web/public
+node_modules
+yarn-error.log
+sample/public
 docker-compose
 coverage
