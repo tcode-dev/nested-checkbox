@@ -101,7 +101,6 @@ class TopController {
 
     /**
      * submitCallback
-     * @return object
      */
     submitCallback() {
         this.pageTransition.transition(this.nestedCheckbox.getParameter());
