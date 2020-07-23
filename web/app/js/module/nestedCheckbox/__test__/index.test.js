@@ -95,7 +95,7 @@ describe('nestedCheckbox', () => {
         });
     });
 
-    describe('init', () => {
+    describe('init checked', () => {
         it('最上位のチェックがonになったとき、すべてのチェックがonになること', () => {
             const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
 
@@ -160,6 +160,32 @@ describe('nestedCheckbox', () => {
         });
     });
 
+    describe('init indeterminate', () => {
+        it('4層目の兄弟のチェックが一つ以上on、一つ以上offの場合、先祖のindeterminateがtrueになること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            root.querySelector('[name="layer4_cd"][value="1-3-2-1"]').click();
+
+            expect(rootCheckbox.indeterminate).toEqual(true);
+            expect(root.querySelector('[name="layer2_cd"][value="1-3"]').indeterminate).toEqual(true);
+            expect(root.querySelector('[name="layer3_cd"][value="1-3-2"]').indeterminate).toEqual(true);
+        });
+
+        it('4層目の兄弟のチェックがすべてonの場合、親のindeterminateがfalse、先祖のindeterminateがtrueになること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            root.querySelector('[name="layer4_cd"][value="1-3-2-1"]').click();
+            root.querySelector('[name="layer4_cd"][value="1-3-2-2"]').click();
+            root.querySelector('[name="layer4_cd"][value="1-3-2-3"]').click();
+
+            expect(rootCheckbox.indeterminate).toEqual(true);
+            expect(root.querySelector('[name="layer2_cd"][value="1-3"]').indeterminate).toEqual(true);
+            expect(root.querySelector('[name="layer3_cd"][value="1-3-2"]').indeterminate).toEqual(false);
+        });
+    });
+
     describe('setCallback', () => {
         it('最上位のチェックがonになったとき、callbackが呼ばれること', () => {
             const mockCallback = jest.fn();
@@ -181,6 +207,18 @@ describe('nestedCheckbox', () => {
             root.querySelector('[name="layer4_cd"][value="1-3-2-1"]').click();
 
             expect(mockCallback).toHaveBeenCalled();
+        });
+
+        it('チェックの連動処理が終わったあとにcallbackが呼ばれること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+            const mockCallback = jest.fn(() => {
+                expect(nestedCheckbox.getParameter()).toEqual({ layer1_cd: ['1'] });
+            });
+
+            nestedCheckbox.init();
+            rootCheckbox.click();
+            root.querySelector('[name="layer4_cd"][value="1-3-2-1"]').click();
+            nestedCheckbox.setCallback(mockCallback);
         });
 
         it('callbackを省略した場合エラーにならないこと', () => {
