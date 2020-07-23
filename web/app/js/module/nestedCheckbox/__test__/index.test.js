@@ -82,19 +82,6 @@ describe('nestedCheckbox', () => {
         allCheckbox = root.querySelectorAll(`[type="checkbox"]`);
     });
 
-    describe('constructor', () => {
-        it('引数のdomを省略した場合、documentが使用されること', () => {
-            const mockCallback = jest.fn();
-            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED);
-
-            nestedCheckbox.init();
-            nestedCheckbox.setCallback(mockCallback);
-            rootCheckbox.click();
-
-            expect(mockCallback).toHaveBeenCalled();
-        });
-    });
-
     describe('init checked', () => {
         it('最上位のチェックがonになったとき、すべてのチェックがonになること', () => {
             const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
@@ -157,6 +144,17 @@ describe('nestedCheckbox', () => {
             root.querySelector('[name="layer2_cd"][value="1-2"]').click();
 
             expect(rootCheckbox.checked).toEqual(false);
+        });
+
+        it('引数のdomを省略しても動作すること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED);
+
+            nestedCheckbox.init();
+
+            root.querySelector('[name="layer1_cd"]').click();
+            root.querySelectorAll(`[type="checkbox"]`).forEach((checkbox) => {
+                expect(checkbox.checked).toEqual(true);
+            });
         });
     });
 
