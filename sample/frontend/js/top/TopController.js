@@ -58,7 +58,7 @@ class TopController {
         this.searchApi = new ApiClient(API.SEARCH);
         this.animateCounter = new AnimateCounter(this.root.querySelector(SELECTOR.SEARCH_RESULT));
         this.submit = new Submit(this.root, () => {
-            return this.submitCallback();
+            this.onSubmitCallback();
         });
         this.pageTransition = new PageTransition(`${this.root.action}?`);
     }
@@ -73,7 +73,7 @@ class TopController {
         this.submit.init();
         this.indeterminate.init();
         this.nestedCheckbox.setCallback(() => {
-            this.request();
+            this.onChangeCallback();
         });
     }
 
@@ -100,9 +100,16 @@ class TopController {
     }
 
     /**
-     * submitCallback
+     * onChangeCallback
      */
-    submitCallback() {
+    onChangeCallback() {
+        this.request();
+    }
+
+    /**
+     * onSubmitCallback
+     */
+    onSubmitCallback() {
         this.pageTransition.transition(this.nestedCheckbox.getParameter());
     }
 }
