@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash/cloneDeep';
 import CheckboxGroup from './CheckboxGroup';
 
 /**
@@ -12,7 +11,7 @@ export default class Nester extends CheckboxGroup {
      * @param {object} parent HTMLElement
      */
     constructor(selector, parent) {
-        const cloneSelector = cloneDeep(selector);
+        const cloneSelector = JSON.parse(JSON.stringify(selector));
         const targetSelector = cloneSelector.shift();
         const checkbox = parent.querySelector(targetSelector.TRIGGER);
         const groupList = cloneSelector.length ? parent.querySelectorAll(cloneSelector[0].GROUP) : [];

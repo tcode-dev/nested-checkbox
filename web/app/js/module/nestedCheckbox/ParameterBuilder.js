@@ -1,5 +1,3 @@
-import cloneDeep from 'lodash/cloneDeep';
-
 /**
  * ParameterBuilder
  * apiに必要なパラメータを取得する
@@ -17,7 +15,7 @@ export default class ParameterBuilder {
     build() {
         this._groupByName(this.state);
 
-        return cloneDeep(this.params);
+        return this.params;
     }
 
     /**
