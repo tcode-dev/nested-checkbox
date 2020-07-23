@@ -1,4 +1,4 @@
-import NestedCheckbox from '../../nestedCheckbox';
+import NestedCheckbox from '../';
 
 const SELECTOR = {
     NESTED_CHECKBOX: '#j-nestedCheckbox',
