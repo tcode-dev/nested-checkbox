@@ -4,7 +4,7 @@
     "build": "webpack --config webpack.dev.js --mode development",
     "build:watch": "webpack --config webpack.dev.js --env.watch --mode development",
     "build:prod": "webpack --config webpack.prod.js --mode production",
-    "csscomb": "csscomb app/scss",
+    "csscomb": "csscomb sample/frontend/scss",
     "eslint": "eslint '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
     "prettier": "prettier --check '**/*.js'",
