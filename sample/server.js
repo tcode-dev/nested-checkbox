@@ -4,6 +4,7 @@ const ejs = require('ejs');
 const app = express();
 const PORT = process.env.PORT || 8080;
 const List = require('./backend/mock/List');
+const Search = require('./backend/mock/Search');
 
 app.set('views', __dirname + '/backend/view');
 app.use(express.static(__dirname + '/public'));
@@ -16,8 +17,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/search', (req, res) => {
+    const search = new Search();
+
     res.json({
-        count: Math.round(Math.random() * 1000),
+        count: search.count(),
     });
 });
 
