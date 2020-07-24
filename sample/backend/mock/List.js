@@ -85,7 +85,15 @@ const list = [
     },
 ];
 
+/**
+ * List
+ */
 class List {
+    /**
+     * get
+     * dom構築用のデータを返す
+     * return {array}
+     */
     get() {
         return list;
     }
