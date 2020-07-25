@@ -1,0 +1,13 @@
+steps:
+- name: 'ubuntu'
+  args: ['cp', './sample/package.remote.frontend.json', './package.json']
+- name: 'node:14.5.0'
+  entrypoint: 'yarn'
+  args: [ 'install' ]
+- name: 'node:14.5.0'
+  entrypoint: 'yarn'
+  args: [ 'build' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/$PROJECT_ID/nested-checkbox-image', '.' ]
+images:
+- 'gcr.io/$PROJECT_ID/nested-checkbox-image'
