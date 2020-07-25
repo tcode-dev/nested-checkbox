@@ -6,18 +6,55 @@ import SearchParams from './SearchParams';
  */
 export default class Restorer {
     /**
-     * checkboxのon/offの状態を復元する
+     * @constructor
      * @param {object} root HTMLElement
-     * @param {object} parameters
      */
-    restore(root, queryString) {
-        const searchParams = new SearchParams(queryString);
-        const params = searchParams.parse();
+    constructor(root) {
+        this.root = root;
+    }
+
+    /**
+     * restore
+     * @param {string | object} param
+     */
+    restore(param) {
+        if (typeof param === 'string') {
+            this._restoreByQueryString(param);
+        } else {
+            this._restoreByQueryMap(param);
+        }
+    }
+
+    /**
+     * queryStringから復元
+     * @param {string} param
+     */
+    _restoreByQueryString(param) {
+        const searchParams = new SearchParams();
+
+        this._restoreByQueryMap(searchParams.parse(param));
+    }
+
+    /**
+     * objectから復元
+     * @param {object} param
+     */
+    _restoreByQueryMap(param) {
+        const searchParams = new SearchParams();
+
+        this._restore(searchParams.parse(param));
+    }
+
+    /**
+     * checkboxのon/offの状態を復元する
+     * @param {object} querySMap
+     */
+    _restore(querySMap) {
         const event = new Event('change');
 
-        params.forEach(([name, value]) => {
+        Object.entries(querySMap).forEach(([name, value]) => {
             value.forEach((code) => {
-                const checkbox = root.querySelector(`[name="${name}"][value="${code}"]`);
+                const checkbox = this.root.querySelector(`[name="${name}"][value="${code}"]`);
 
                 if (!checkbox) return;
 

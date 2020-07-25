@@ -54,12 +54,11 @@ export default class Index {
 
     /**
      * restore
-     * @param {object} root HTMLElement
-     * @param {string} params
+     * @param {string | object} param
      */
-    restore(params) {
-        const restorer = new Restorer();
+    restore(param) {
+        const restorer = new Restorer(this.root);
 
-        restorer.restore(this.root, params);
+        restorer.restore(param);
     }
 }

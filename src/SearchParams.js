@@ -5,29 +5,44 @@ import querystring from 'querystring';
  */
 export default class SearchParams {
     /**
-     * @constructor
-     * @param {string} parameter
+     * urlのクエリパラメータを取得する
+     * @param {string | object} param
+     * @return {object}
      */
-    constructor(parameter) {
-        this.parameter = parameter;
+    parse(param) {
+        if (typeof param === 'string') {
+            return this._parseByQueryString(param);
+        }
+
+        return this._parseByQueryMap(param);
     }
 
     /**
-     * urlのクエリパラメータを取得する
-     * @return {array}
+     * _parseByQueryMap
+     * @param {string} param
+     * @return {object}
      */
-    parse() {
-        const params = querystring.parse(this.parameter);
+    _parseByQueryString(param) {
+        return this._parseByQueryMap(querystring.parse(param));
+    }
 
-        return Array.from(
-            Object.entries(params).map(([key, value]) => {
-                // 配列の場合[]を取り除く
-                const name = key.replace('[]', '');
+    /**
+     * _parseByQueryMap
+     * @param {object} params
+     * @return {object}
+     */
+    _parseByQueryMap(params) {
+        return Array.from(Object.entries(params)).reduce((accumulator, [key, value]) => {
+            // 配列の場合[]を取り除く
+            const name = key.replace('[]', '');
 
-                // querystringの仕様で単一keyは文字列、複数keyは配列が返される
-                // データ構造を合わせるため単一keyを配列にして返す
-                return [name, Array.isArray(value) ? value : [value]];
-            })
-        );
+            // querystringの仕様で単一keyは文字列、複数keyは配列が返される
+            // データ構造を合わせるため単一keyを配列にして返す
+            const map = {
+                [name]: Array.isArray(value) ? value : [value],
+            };
+
+            return Object.assign({}, accumulator, map);
+        }, {});
     }
 }
