@@ -257,4 +257,75 @@ describe('nestedCheckbox', () => {
             expect(nestedCheckbox.getParameter()).toEqual({ layer3_cd: ['1-3-1', '1-3-2'] });
         });
     });
+
+    describe('restore', () => {
+        it('指定したパラメータのdomが復元されること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+            const checkbox = root.querySelector(`[name="layer1_cd"][value="1"]`);
+            const query = 'layer1_cd=1';
+
+            nestedCheckbox.restore(query);
+
+            expect(checkbox.checked).toEqual(true);
+        });
+
+        it('指定したパラメータが複数ある場合、domが複数復元されること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+            const checkbox1 = root.querySelector(`[name="layer2_cd"][value="1-1"]`);
+            const checkbox2 = root.querySelector(`[name="layer3_cd"][value="1-2-2"]`);
+            const query = 'layer2_cd=1-1&layer3_cd=1-2-2';
+
+            nestedCheckbox.restore(query);
+
+            expect(checkbox1.checked).toEqual(true);
+            expect(checkbox2.checked).toEqual(true);
+        });
+
+        it('domが復元されたときにイベントが発火すること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+            const checkbox = root.querySelector(`[name="layer1_cd"][value="1"]`);
+            const query = 'layer1_cd=1';
+
+            checkbox.addEventListener('change', (e) => {
+                expect(e.target.checked).toEqual(true);
+            });
+
+            nestedCheckbox.restore(query);
+        });
+
+        it('指定したパラメータが存在しない場合domが復元されないこと', () => {
+            const query = 'layer1_cd=0';
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.restore(query);
+
+            const checkbox = root.querySelector(`:checked`);
+
+            expect(checkbox).toEqual(null);
+        });
+
+        it('空文字を渡された場合domが復元されないこと', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.restore('');
+
+            const checkbox = root.querySelector(`:checked`);
+
+            expect(checkbox).toEqual(null);
+        });
+
+        it('配列のqueryが渡された場合domが復元されること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+            const checkbox1 = root.querySelector(`[name="layer3_cd"][value="1-2-2"]`);
+            const checkbox2 = root.querySelector(`[name="layer4_cd"][value="1-3-2-1"]`);
+            const checkbox3 = root.querySelector(`[name="layer4_cd"][value="1-3-2-3"]`);
+            const query = 'layer3_cd[]=1-2-2&layer4_cd[]=1-3-2-1&layer4_cd[]=1-3-2-3';
+
+            nestedCheckbox.restore(query);
+
+            expect(checkbox1.checked).toEqual(true);
+            expect(checkbox2.checked).toEqual(true);
+            expect(checkbox3.checked).toEqual(true);
+        });
+    });
 });

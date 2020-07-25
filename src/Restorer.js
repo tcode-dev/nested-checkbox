@@ -1,27 +1,23 @@
+import SearchParams from './SearchParams';
+
 /**
  * Restorer
  * checkboxのon/offの状態を復元する
  */
 export default class Restorer {
     /**
-     * @constructor
+     * checkboxのon/offの状態を復元する
      * @param {object} root HTMLElement
      * @param {object} parameters
      */
-    constructor(root, parameters) {
-        this.root = root;
-        this.parameters = parameters;
-    }
-
-    /**
-     * checkboxのon/offの状態を復元する
-     */
-    restore() {
+    restore(root, queryString) {
+        const searchParams = new SearchParams(queryString);
+        const params = searchParams.parse();
         const event = new Event('change');
 
-        this.parameters.forEach(([name, value]) => {
+        params.forEach(([name, value]) => {
             value.forEach((code) => {
-                const checkbox = this.root.querySelector(`[name="${name}"][value="${code}"]`);
+                const checkbox = root.querySelector(`[name="${name}"][value="${code}"]`);
 
                 if (!checkbox) return;
 

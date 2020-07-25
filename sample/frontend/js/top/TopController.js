@@ -4,8 +4,6 @@ import ApiClient from '../module/ApiClient';
 import Indeterminate from '../module/Indeterminate';
 import NestedCheckbox from '../../../../src';
 import PageTransition from '../module/PageTransition';
-import Restorer from '../module/Restorer';
-import SearchParams from '../module/SearchParams';
 import Submit from '../module/Submit';
 
 const SELECTOR = {
@@ -45,8 +43,6 @@ class TopController {
      * @constructor
      */
     constructor() {
-        const searchParams = new SearchParams(window.location.search.substring(1));
-
         this.root = window.document.querySelector(SELECTOR.ROOT);
         this.indeterminate = new Indeterminate(
             this.root,
@@ -54,7 +50,6 @@ class TopController {
             SELECTOR.STATE.INDETERMINATE
         );
         this.nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, this.root.querySelector(SELECTOR.NESTED_CHECKBOX));
-        this.restorer = new Restorer(this.root, searchParams.parse());
         this.searchApi = new ApiClient(API.SEARCH);
         this.animateCounter = new AnimateCounter(this.root.querySelector(SELECTOR.SEARCH_RESULT));
         this.submit = new Submit(this.root, () => {
@@ -68,7 +63,7 @@ class TopController {
      */
     init() {
         this.nestedCheckbox.init();
-        this.restorer.restore();
+        this.nestedCheckbox.restore(window.location.search.substring(1));
         this.request();
         this.submit.init();
         this.indeterminate.init();

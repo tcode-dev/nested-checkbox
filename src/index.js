@@ -1,5 +1,6 @@
 import Nester from './Nester';
 import ParameterBuilder from './ParameterBuilder';
+import Restorer from './Restorer';
 
 /**
  * Index
@@ -38,7 +39,7 @@ export default class Index {
      * @return {object}
      */
     getParameter() {
-        const parameterBuilder = new ParameterBuilder(this._getState());
+        const parameterBuilder = new ParameterBuilder(this.getState());
 
         return parameterBuilder.build();
     }
@@ -47,7 +48,18 @@ export default class Index {
      * チェック状態を取得する
      * @return {array}
      */
-    _getState() {
+    getState() {
         return [this.rootCheckbox.getState()];
+    }
+
+    /**
+     * restore
+     * @param {object} root HTMLElement
+     * @param {string} params
+     */
+    restore(params) {
+        const restorer = new Restorer();
+
+        restorer.restore(this.root, params);
     }
 }
