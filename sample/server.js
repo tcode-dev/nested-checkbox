@@ -2,7 +2,7 @@ const asset = require(__dirname + '/backend/library/asset');
 const express = require('express');
 const ejs = require('ejs');
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 80;
 const List = require('./backend/mock/List');
 const Search = require('./backend/mock/Search');
 

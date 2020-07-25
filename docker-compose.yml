@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.local
     container_name: web-container
     ports:
-      - 8080:3000
+      - 80:80
     volumes:
       - ./:/home/app
     tty: true
