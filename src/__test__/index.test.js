@@ -200,6 +200,26 @@ describe('nestedCheckbox', () => {
 
             expect(checkbox.length).toEqual(1);
         });
+
+        it('イベント解除後再登録して動作すること', () => {
+            const mockCallback1 = jest.fn();
+            const mockCallback2 = jest.fn();
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.addEventListener();
+            nestedCheckbox.setCallback(mockCallback1);
+            nestedCheckbox.removeEventListener();
+            nestedCheckbox.addEventListener();
+            nestedCheckbox.setCallback(mockCallback2);
+            rootCheckbox.click();
+
+            expect(mockCallback1).not.toHaveBeenCalled();
+            expect(mockCallback2).toHaveBeenCalled();
+
+            root.querySelectorAll(`[type="checkbox"]`).forEach((checkbox) => {
+                expect(checkbox.checked).toEqual(true);
+            });
+        });
     });
 
     describe('setCallback', () => {
