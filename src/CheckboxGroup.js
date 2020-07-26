@@ -28,6 +28,7 @@ export default class CheckboxGroup extends Checkbox {
             name: this.getName(),
             value: this.getValue(),
             isChecked: this.isChecked(),
+            isIndeterminate: this.isIndeterminate(),
             children: this.children.map((child) => child.getState()),
         };
     }
