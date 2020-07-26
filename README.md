@@ -31,7 +31,7 @@
 ```
 
 ```js
-import NestedCheckbox from '../module/nestedCheckbox';
+import NestedCheckbox from '../../../../src';
 
 const SELECTOR = {
     NESTED: [
@@ -53,5 +53,5 @@ const SELECTOR = {
 
 const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED);
 
-nestedCheckbox.init();
+nestedCheckbox.addEventListener();
 ```

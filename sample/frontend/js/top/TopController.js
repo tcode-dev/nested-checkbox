@@ -11,7 +11,6 @@ const SELECTOR = {
     NESTED_CHECKBOX: '#j-nestedCheckbox',
     SEARCH_RESULT: '#j-searchResult',
     INDETERMINATE: '#j-indeterminate',
-    // 上の階層から定義する
     NESTED: [
         {
             GROUP: '.j-nestedCheckbox__group--layer1',
