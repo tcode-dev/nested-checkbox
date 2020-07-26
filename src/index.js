@@ -80,4 +80,29 @@ export default class Index {
 
         restorer.restore(param);
     }
+
+    /**
+     * checkAll
+     */
+    checkAll() {
+        this.chagneAll(true);
+    }
+
+    /**
+     * uncheckAll
+     */
+    uncheckAll() {
+        this.chagneAll(false);
+    }
+
+    /**
+     * chagneAll
+     * @param {boolean} checked
+     */
+    chagneAll(checked) {
+        const event = new Event('change');
+
+        this.rootCheckbox.check(checked);
+        this.rootCheckbox.checkbox.dispatchEvent(event);
+    }
 }

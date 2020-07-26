@@ -348,4 +348,31 @@ describe('nestedCheckbox', () => {
             expect(mockCallback).toHaveBeenCalled();
         });
     });
+
+    describe('checkAll', () => {
+        it('すべてのチェックがonになること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            nestedCheckbox.checkAll();
+
+            root.querySelectorAll(`[type="checkbox"]`).forEach((checkbox) => {
+                expect(checkbox.checked).toEqual(true);
+            });
+        });
+    });
+
+    describe('uncheckAll', () => {
+        it('すべてのチェックがoffになること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            nestedCheckbox.checkAll();
+            nestedCheckbox.uncheckAll();
+
+            const checkbox = root.querySelector(`:checked`);
+
+            expect(checkbox).toEqual(null);
+        });
+    });
 });
