@@ -14,6 +14,7 @@ export default class Index {
     constructor(selector, root = window.document) {
         this.selector = selector;
         this.root = root;
+        this.isCallbackAvailable = false;
     }
 
     /**
@@ -28,10 +29,28 @@ export default class Index {
      * setCallback
      * @param {function} callback
      */
-    setCallback(callback = () => {}) {
+    setCallback(callback) {
+        this.isCallbackAvailable = true;
+
         this.rootCheckbox.setCallback(() => {
-            callback();
+            if (this.isCallbackAvailable) {
+                callback();
+            }
         });
+    }
+
+    /**
+     * callbackを一時停止
+     */
+    pauseCallback() {
+        this.isCallbackAvailable = false;
+    }
+
+    /**
+     * callbackの一時停止を解除
+     */
+    startCallback() {
+        this.isCallbackAvailable = true;
     }
 
     /**

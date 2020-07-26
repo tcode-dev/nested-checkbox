@@ -206,26 +206,6 @@ describe('nestedCheckbox', () => {
 
             expect(mockCallback).toHaveBeenCalled();
         });
-
-        it('チェックの連動処理が終わったあとにcallbackが呼ばれること', () => {
-            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
-            const mockCallback = jest.fn(() => {
-                expect(nestedCheckbox.getParameter()).toEqual({ layer1_cd: ['1'] });
-            });
-
-            nestedCheckbox.init();
-            rootCheckbox.click();
-            root.querySelector('[name="layer4_cd"][value="1-3-2-1"]').click();
-            nestedCheckbox.setCallback(mockCallback);
-        });
-
-        it('callbackを省略した場合エラーにならないこと', () => {
-            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
-
-            nestedCheckbox.init();
-            nestedCheckbox.setCallback();
-            rootCheckbox.click();
-        });
     });
 
     describe('getParameter', () => {
@@ -337,6 +317,35 @@ describe('nestedCheckbox', () => {
             const checkbox = root.querySelector(`:checked`);
 
             expect(checkbox).toEqual(null);
+        });
+    });
+
+    describe('pauseCallback', () => {
+        it('callbackが呼ばれないこと', () => {
+            const mockCallback = jest.fn();
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            nestedCheckbox.setCallback(mockCallback);
+            nestedCheckbox.pauseCallback();
+            rootCheckbox.click();
+
+            expect(mockCallback).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('startCallback', () => {
+        it('callbackが呼ばれること', () => {
+            const mockCallback = jest.fn();
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+
+            nestedCheckbox.init();
+            nestedCheckbox.setCallback(mockCallback);
+            nestedCheckbox.pauseCallback();
+            nestedCheckbox.startCallback();
+            rootCheckbox.click();
+
+            expect(mockCallback).toHaveBeenCalled();
         });
     });
 });
