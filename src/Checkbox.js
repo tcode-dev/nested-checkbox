@@ -10,6 +10,9 @@ export default class Checkbox {
     constructor(checkbox, callback) {
         this.checkbox = checkbox;
         this.callback = callback;
+        this.listener = (e) => {
+            callback(e.target.checked);
+        };
 
         this._addEventListener();
     }
@@ -63,11 +66,16 @@ export default class Checkbox {
     }
 
     /**
+     * イベントを解除する
+     */
+    removeEventListener() {
+        this.checkbox.removeEventListener('change', this.listener);
+    }
+
+    /**
      * イベントを登録する
      */
     _addEventListener() {
-        this.checkbox.addEventListener('change', (e) => {
-            this.callback(e.target.checked);
-        });
+        this.checkbox.addEventListener('change', this.listener);
     }
 }

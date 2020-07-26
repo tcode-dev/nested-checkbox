@@ -18,15 +18,22 @@ export default class Index {
     }
 
     /**
-     * init
+     * addEventListener
      */
-    init() {
+    addEventListener() {
         const parent = this.root.querySelector(this.selector[0].GROUP);
         this.rootCheckbox = new Nester(this.selector, parent);
     }
 
     /**
-     * setCallback
+     * removeEventListener
+     */
+    removeEventListener() {
+        this.rootCheckbox.removeEventListener();
+    }
+
+    /**
+     * checkboxの連動処理が終わったあとに呼ばれるcallbackを登録
      * @param {function} callback
      */
     setCallback(callback) {

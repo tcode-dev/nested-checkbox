@@ -41,6 +41,16 @@ export default class CheckboxGroup extends Checkbox {
     }
 
     /**
+     * イベントを解除する
+     */
+    removeEventListener() {
+        super.removeEventListener();
+        this.children.forEach((child) => {
+            child.removeEventListener();
+        });
+    }
+
+    /**
      * 子を更新する
      * @param {boolean} checked
      */
