@@ -68,7 +68,7 @@ export default class CheckboxGroup extends Checkbox {
      */
     _notifyParentCallback(checked) {
         this._updateChecked(checked);
-        this._updateIndeterminate(checked);
+        this._updateIndeterminate();
         this.notifyParent(checked);
     }
 
