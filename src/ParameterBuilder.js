@@ -3,9 +3,12 @@
  * apiに必要なパラメータを取得する
  */
 export default class ParameterBuilder {
+    /**
+     * @constructor
+     * @param {object} state 
+     */
     constructor(state) {
         this.state = state;
-        this.params = {};
     }
 
     /**
@@ -13,6 +16,7 @@ export default class ParameterBuilder {
      * @return {object}
      */
     build() {
+        this.params = {};
         this._groupByName(this.state);
 
         return this.params;
