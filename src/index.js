@@ -18,6 +18,13 @@ export default class Index {
     }
 
     /**
+     * init
+     */
+    init() {
+        this.addEventListener();
+    }
+
+    /**
      * addEventListener
      */
     addEventListener() {

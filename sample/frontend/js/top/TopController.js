@@ -61,7 +61,7 @@ class TopController {
      * init
      */
     init() {
-        this.nestedCheckbox.addEventListener();
+        this.nestedCheckbox.init();
         this.nestedCheckbox.restore(window.location.search.substring(1));
         this.request();
         this.submit.init();
