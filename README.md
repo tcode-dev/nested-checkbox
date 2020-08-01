@@ -1,11 +1,21 @@
 # Nested Checkbox
 
-## 概要
-ネストされたチェックボックスの連動
+Module for check/uncheck nested checkboxes.
 
-## Sample
+## Demo
 <img src="./doc/sample.gif" width="300">
 
+## Sample Site
+
+https://nested-checkbox.tkw.tokyo
+
+## Installation
+
+```bash
+npm install nested-checkbox
+```
+
+### Usage
 ```html
 <ul>
     <li class="j-nestedCheckbox__group--layer1">
@@ -31,11 +41,10 @@
 ```
 
 ```js
-import NestedCheckbox from '../../../../src';
+import NestedCheckbox from 'nested-checkbox';
 
 const SELECTOR = {
     NESTED: [
-        // 上の階層から定義する
         {
             GROUP: '.j-nestedCheckbox__group--layer1',
             TRIGGER: '.j-nestedCheckbox__trigger--layer1',
@@ -55,3 +64,23 @@ const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED);
 
 nestedCheckbox.addEventListener();
 ```
+
+## Methods
+
+* init()
+* addEventListener()
+* removeEventListener()
+* setCallback(function)
+* pauseCallback()
+* startCallback()
+* getSelectedParams()
+* getSelectedParentParams()
+* getState()
+* restore(param)
+* checkAll()
+* uncheckAll()
+
+
+## License
+
+[MIT](http://b4b4r07.mit-license.org)
