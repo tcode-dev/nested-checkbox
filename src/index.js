@@ -1,5 +1,5 @@
 import Nester from './Nester';
-import ParameterBuilder from './ParameterBuilder';
+import ParamExtractor from './ParamExtractor';
 import Restorer from './Restorer';
 
 /**
@@ -70,16 +70,63 @@ export default class Index {
     /**
      * チェックされたname属性のパラメータを取得する
      * @return {object}
+     * @example { layer2_cd: ['1-2'], layer3_cd: ['1-2-1', '1-2-2'] }
      */
-    getParameter() {
-        const parameterBuilder = new ParameterBuilder(this.getState());
+    getSelectedParams() {
+        const paramExtractor = new ParamExtractor(this.getState());
 
-        return parameterBuilder.build();
+        return paramExtractor.getSelectedParams();
+    }
+
+    /**
+     * チェックされたname属性のパラメータを取得する
+     * 親が選択されている場合、子は含めない
+     * @return {object}
+     * @example { layer2_cd: ['1-2'] }
+     */
+    getSelectedParentParams() {
+        const paramExtractor = new ParamExtractor(this.getState());
+
+        return paramExtractor.getSelectedParentParams();
     }
 
     /**
      * チェック状態を取得する
      * @return {array}
+     * @example
+        [
+            {
+                name: 'layer1_cd',
+                value: '1',
+                isChecked: false,
+                isIndeterminate: true,
+                children: [
+                    { name: 'layer2_cd', value: '1-1', isChecked: false, isIndeterminate: false, children: [] },
+                    {
+                        name: 'layer2_cd',
+                        value: '1-2',
+                        isChecked: true,
+                        isIndeterminate: false,
+                        children: [
+                            {
+                                name: 'layer3_cd',
+                                value: '1-2-1',
+                                isChecked: true,
+                                isIndeterminate: false,
+                                children: [],
+                            },
+                            {
+                                name: 'layer3_cd',
+                                value: '1-2-2',
+                                isChecked: true,
+                                isIndeterminate: false,
+                                children: [],
+                            },
+                        ],
+                    },
+                ],
+            },
+        ];
      */
     getState() {
         return [this.rootCheckbox.getState()];
@@ -88,6 +135,9 @@ export default class Index {
     /**
      * restore
      * @param {string | object} param
+     * @example 'layer3_cd=1-2-1&layer3_cd=1-3-1&layer4_cd=1-3-2-1'
+     * @example 'layer3_cd[]=1-2-2&layer4_cd[]=1-3-2-1&layer4_cd[]=1-3-2-3'
+     * @example { layer3_cd: ['1-2-1', '1-3-1'], layer4_cd: ['1-3-2-1'] }
      */
     restore(param) {
         const restorer = new Restorer(this.root);

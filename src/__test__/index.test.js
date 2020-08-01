@@ -246,14 +246,44 @@ describe('nestedCheckbox', () => {
         });
     });
 
-    describe('getParameter', () => {
+    describe('getSelectedParams', () => {
+        it('最上位のチェックがonのとき、全てのパラメータが取得できること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+            const expected = {
+                layer1_cd: ['1'],
+                layer2_cd: ['1-1', '1-2', '1-3'],
+                layer3_cd: ['1-2-1', '1-2-2', '1-3-1', '1-3-2', '1-3-3'],
+                layer4_cd: ['1-3-2-1', '1-3-2-2', '1-3-2-3'],
+            };
+
+            nestedCheckbox.init();
+            rootCheckbox.click();
+
+            expect(nestedCheckbox.getSelectedParams()).toEqual(expected);
+        });
+
+        it('2層目のみチェックがonのとき、その配下のパラメータが取得できること', () => {
+            const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
+            const expected = {
+                layer2_cd: ['1-2'],
+                layer3_cd: ['1-2-1', '1-2-2'],
+            };
+
+            nestedCheckbox.init();
+            root.querySelector('[name="layer2_cd"][value="1-2"]').click();
+
+            expect(nestedCheckbox.getSelectedParams()).toEqual(expected);
+        });
+    });
+
+    describe('getSelectedParentParams', () => {
         it('最上位のチェックがonのとき、最上位のパラメータのみ取得できること', () => {
             const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, root);
 
             nestedCheckbox.init();
             rootCheckbox.click();
 
-            expect(nestedCheckbox.getParameter()).toEqual({ layer1_cd: ['1'] });
+            expect(nestedCheckbox.getSelectedParentParams()).toEqual({ layer1_cd: ['1'] });
         });
 
         it('2層目のみチェックがonのとき、2層目のパラメータのみ取得できること', () => {
@@ -262,7 +292,7 @@ describe('nestedCheckbox', () => {
             nestedCheckbox.init();
             root.querySelector('[name="layer2_cd"][value="1-2"]').click();
 
-            expect(nestedCheckbox.getParameter()).toEqual({ layer2_cd: ['1-2'] });
+            expect(nestedCheckbox.getSelectedParentParams()).toEqual({ layer2_cd: ['1-2'] });
         });
 
         it('2層目のチェックがoff、3層目のパラメータが複数チェックがonのとき、3層目のパラメータが複数取得できること', () => {
@@ -272,7 +302,7 @@ describe('nestedCheckbox', () => {
             root.querySelector('[name="layer3_cd"][value="1-3-1"]').click();
             root.querySelector('[name="layer3_cd"][value="1-3-2"]').click();
 
-            expect(nestedCheckbox.getParameter()).toEqual({ layer3_cd: ['1-3-1', '1-3-2'] });
+            expect(nestedCheckbox.getSelectedParentParams()).toEqual({ layer3_cd: ['1-3-1', '1-3-2'] });
         });
     });
 

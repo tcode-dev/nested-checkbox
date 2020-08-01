@@ -76,7 +76,7 @@ class TopController {
      */
     request() {
         this.searchApi
-            .get(this.nestedCheckbox.getParameter())
+            .get(this.nestedCheckbox.getSelectedParentParams())
             .then((result) => {
                 this.searchApiCallback(result);
             })
@@ -104,7 +104,7 @@ class TopController {
      * onSubmitCallback
      */
     onSubmitCallback() {
-        this.pageTransition.transition(this.nestedCheckbox.getParameter());
+        this.pageTransition.transition(this.nestedCheckbox.getSelectedParentParams());
     }
 }
 
