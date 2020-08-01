@@ -149,21 +149,21 @@ export default class Index {
      * checkAll
      */
     checkAll() {
-        this.chagneAll(true);
+        this._chagneAll(true);
     }
 
     /**
      * uncheckAll
      */
     uncheckAll() {
-        this.chagneAll(false);
+        this._chagneAll(false);
     }
 
     /**
-     * chagneAll
+     * _chagneAll
      * @param {boolean} checked
      */
-    chagneAll(checked) {
+    _chagneAll(checked) {
         const event = new Event('change');
 
         this.rootCheckbox.check(checked);
