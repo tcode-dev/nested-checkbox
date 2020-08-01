@@ -12,7 +12,7 @@ https://nested-checkbox.tkw.tokyo
 ## Installation
 
 ```bash
-npm install nested-checkbox
+npm install @tkwtokyo/nested-checkbox
 ```
 
 ### Usage
