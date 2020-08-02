@@ -3,3 +3,4 @@ yarn-error.log
 sample/public
 docker-compose
 coverage
+.npmrc

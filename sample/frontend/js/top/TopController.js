@@ -2,7 +2,7 @@ import AnimateCounter from '../module/AnimateCounter';
 import API from '../const/API.json';
 import ApiClient from '../module/ApiClient';
 import Indeterminate from '../module/Indeterminate';
-import NestedCheckbox from '../../../../src';
+import NestedCheckbox from '@tkwtokyo/nested-checkbox';
 import PageTransition from '../module/PageTransition';
 import Submit from '../module/Submit';
 
