@@ -51,9 +51,7 @@ class TopController {
         this.nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED, this.root.querySelector(SELECTOR.NESTED_CHECKBOX));
         this.searchApi = new ApiClient(API.SEARCH);
         this.animateCounter = new AnimateCounter(this.root.querySelector(SELECTOR.SEARCH_RESULT));
-        this.submit = new Submit(this.root, () => {
-            this.onSubmitCallback();
-        });
+        this.submit = new Submit(this.root, () => this.onSubmitCallback());
         this.pageTransition = new PageTransition(`${this.root.action}?`);
     }
 
@@ -66,9 +64,7 @@ class TopController {
         this.request();
         this.submit.init();
         this.indeterminate.init();
-        this.nestedCheckbox.setCallback(() => {
-            this.onChangeCallback();
-        });
+        this.nestedCheckbox.setCallback(() => this.onChangeCallback());
     }
 
     /**
@@ -77,12 +73,8 @@ class TopController {
     request() {
         this.searchApi
             .get(this.nestedCheckbox.getSelectedParentParams())
-            .then((result) => {
-                this.searchApiCallback(result);
-            })
-            .catch(() => {
-                this.searchApiCallback({ count: 0 });
-            });
+            .then((result) => this.searchApiCallback(result))
+            .catch(() => this.searchApiCallback({ count: 0 }));
     }
 
     /**
