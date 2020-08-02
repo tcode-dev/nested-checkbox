@@ -6,7 +6,7 @@ Module for check/uncheck nested checkboxes.
 
 https://nested-checkbox.tkw.tokyo
 
-<img src="./doc/sample.gif" width="300">
+<img src="https://user-images.githubusercontent.com/42083313/89112796-43c58f80-d4a3-11ea-9803-adf2bc68120b.gif" width="300">
 
 ## Installation
 
