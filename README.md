@@ -3,11 +3,10 @@
 Module for check/uncheck nested checkboxes.
 
 ## Demo
-<img src="./doc/sample.gif" width="300">
-
-## Sample Site
 
 https://nested-checkbox.tkw.tokyo
+
+<img src="./doc/sample.gif" width="300">
 
 ## Installation
 
