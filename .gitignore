@@ -1,6 +1,6 @@
-node_modules
-yarn-error.log
-sample/public
-docker-compose
-coverage
 .npmrc
+coverage
+docker-compose
+node_modules
+sample/public
+yarn-error.log
