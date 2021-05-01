@@ -38,7 +38,7 @@ npm install @tcode-dev/nested-checkbox
 ```
 
 ```js
-import NestedCheckbox from '@tkwtokyo/nested-checkbox';
+import NestedCheckbox from '@tcode-dev/nested-checkbox';
 
 const SELECTOR = {
     NESTED: [
