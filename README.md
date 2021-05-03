@@ -59,7 +59,7 @@ const SELECTOR = {
 
 const nestedCheckbox = new NestedCheckbox(SELECTOR.NESTED);
 
-nestedCheckbox.addEventListener();
+nestedCheckbox.init();
 ```
 
 ## Methods
