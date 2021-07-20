@@ -4,7 +4,7 @@ Module for check/uncheck nested checkboxes.
 
 ## Demo
 
-<img src="https://user-images.githubusercontent.com/42083313/89112796-43c58f80-d4a3-11ea-9803-adf2bc68120b.gif" width="300">
+<img src="https://user-images.githubusercontent.com/42083313/126348576-719536dc-ddb8-436b-bf7b-ffe3a779a208.gif" width="300">
 
 ## Installation
 
